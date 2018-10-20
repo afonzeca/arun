@@ -12,7 +12,7 @@ The Bosun Microframework has "out-of-the-box" native support for Dependency Inje
 
 **It's magic!** 
 
-You create a class in a specific directory (e.g. App/Managers/Cmd/CommandNameDomain.php") which extends a specific
+You create a class in a specific directory (e.g. app/Managers/Cmd/CommandNameDomain.php") which extends a specific
 "Domain BaseClass", then you define your methods with your code, type hinting every parameter (recommended), set a default value for optional parameters...
 and you have a new command that you can call from CLI like the following:
 
@@ -58,9 +58,21 @@ Anyway... Too much words... Now Let's some code... ;-)
 
 **How to install**
 
-You need php 7.2, Composer and Git installed on your (Linux only!) PC!
+You need php 7.2, Composer and Git installed on your machine (for now tested only on Linux/Ubuntu/Mint).
 
-Git clone the following repository and run composer install inside the created folder!
+Git clone the repository 
+
+```bash
+git clone https://github.com/afonzeca/bosun.git
+```
+
+and run 
+
+```bash
+composer install 
+```
+
+inside the created "bosun" folder!
 
 In the next releases I will split the bosun core from the framework "boilerplate" and I will publish
 everything on Packagist.org so Composer can be used for creating Bosun Projects!
