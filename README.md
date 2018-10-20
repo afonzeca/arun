@@ -269,7 +269,7 @@ without "=" is not supported (e.g. '-i something').
 
 You can use your options whenever you want (behind, in the middle or the end of DOMAIN:ACTION).
 
-Command like these are all valid:
+Commands like these are all valid:
 
 ```
 .\bosun table:create bills id1 db2 -i --pk="id" --create-fks -u="root" 
@@ -313,7 +313,7 @@ The value of -u is root
 
 ```
 
-*** Example 4 - How to inject something ***
+**Example 4 - How to inject something**
 
 Bosun also supports dependency injection from container.
 
