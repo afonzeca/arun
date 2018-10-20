@@ -1,0 +1,28 @@
+#
+# [ This file is part of "Bosun - CLI Php Microframework" released under the following terms - (C) 2018 by Angelo Fonzeca - The present code is released under Apache License Version 2.0 ]
+#
+# [ Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ )                              ]
+#
+
+
+#
+# APPLICATION NAME
+#
+APP_NAME="BOSUN"
+
+#
+# COMMAND WHITELIST FILE (without PHP and FULL OR RELATIVE PATH)
+#
+# IT IS MANDATORY THAT IS FILE IS PRESENT INTO config/ path
+# CHANGE IT FOR TEST/OTHER PURPOSE SO YOU CAN HAVE DIFFERENT
+# WHITELIST CONFIGURATION
+#
+WHITELIST_NAME="whiteList"
+APP_VERSION="0.2alpha"
+
+#
+# COMMAND LINE COLORS (0 = disabled, 1 = enabled)
+#
+# ENABLE COLORS ONLY ON LINUX
+#
+COLORS=1

@@ -1,4 +1,4 @@
-**"Bosun - CLI Php Microframework" - (C) 2018 by Angelo Fonzeca**
+**"Bosun" (CLI Php Microframework) - (C) 2018 by Angelo Fonzeca**
 
 **What is Bosun?**
 
