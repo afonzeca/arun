@@ -146,7 +146,7 @@ NOTE: In the next releases the whitelist will be deprecated in favor of more rob
 
 _Step 2_
 
-Inside the folder app/Managers/Domains you need to add a class called TableDomain.php, with namespace App\Managers\Cmd 
+Inside the folder app/Managers/Cmd you need to add a class called TableDomain.php, with namespace App\Managers\Cmd 
 , and that extends the DomainCommand base class:
 
 ```php
