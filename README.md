@@ -110,6 +110,8 @@ To add your domain (class containing a set of command), copy and past default en
 
 
 ```php
+<?php
+
 return [
    "default" => [
               "general" => [
@@ -351,6 +353,8 @@ _Step 2_
 Edit your containers/app.php... and replace the content with the following:
 
 ```php
+<?php
+
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Formatter\LineFormatter;
