@@ -2,19 +2,18 @@
 
 **What is Bosun?**
 
-Bosun is a microframework for easily developing "console application" written in PHP OOP. It is quite different from other similar
+Bosun is a microframework for easily developing "console applications" written in PHP OOP. It is quite different from other similar
 frameworks/libraries (Like Symfony Console component, Silly, etc.) because Bosun uses "Convention Over Configuration" for
-managing commands and associated code (your console application...). 
+managing commands and associated code (your console application). 
 
-The Bosun Microframework has "out-of-the-box" native support for Dependency Injection using Containers and Autowire 
+The Bosun Microframework has an "out-of-the-box" native support for Dependency Injection by using Containers and Autowire 
 (thanks to PHP-DI) and an organized tree for easily write your code in a simple way.
 
 
 **It's magic!** 
 
-You create a class in a specific directory (e.g. app/Managers/Cmd/CommandNameDomain.php") which extends a specific
-"Domain BaseClass", then you define your methods with your code, type hinting every parameter (recommended), set a default value for optional parameters...
-and you have a new command that you can call from CLI like the following:
+You create a class in a specific directory (e.g. "app/Managers/Cmd/CommandNameDomain.php") which extends a specific
+"DomainCommand" class, then you define your methods with your code inside, type hinting every parameter (recommended), set a default value for optional parameters... and you have a new command that you can call from CLI as follow:
 
 ```bash
 ./bosun YOURCLASSNAME:YOURMETHOD param1 param2 \[param3\] \[param4=withdefaultvalue\]
@@ -22,7 +21,7 @@ and you have a new command that you can call from CLI like the following:
 
 You can also use options (-i --u=username --password=something --check ).
 
-NOTE: YOURCLASSNAME is called "DOMAIN" and YOURMETHOD is called "ACTION" in the Bosun universe...
+_NOTE: YOURCLASSNAME is called "DOMAIN" and YOURMETHOD is called "ACTION" in the Bosun universe..._
 
 Bosun will do all the job for you... When invoked, it instantiate an object which corresponds to "DOMAIN", and calls
 the Method of the class that corresponds to "ACTION". 
@@ -207,7 +206,7 @@ Now you can call your new command with
 Bosun will to the job for you...
 
 
-_Example 2_ - Optional Params
+**Example 2 - Optional Parameters **
 
 It easy to set optional parameters... Type hint your method parameter and set a default value... for example:
 
@@ -479,7 +478,7 @@ If you need to improve the .envcli file with your parameters, use getenv("KEY") 
 
 **Other Information**
 
-Bosun has many undocumented functions, internals and other usefull things... Asap the documentation will be improved! ;-)  
+Bosun has many undocumented functions, internals and other useful things... ASAP the documentation will be improved! ;-)  
 
 
 **What about the internal Bosun Engine?**
