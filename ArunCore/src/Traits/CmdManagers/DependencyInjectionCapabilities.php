@@ -18,10 +18,27 @@
  *
  * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
  *
- * Arun Application Container - Set here your services (see core.php for example)
- *
- * Date: 27/09/18
- * Time: 13.20
+ * Date: 01/10/18
+ * Time: 13.05
  */
+namespace ArunCore\Traits\CmdManagers;
 
-return [];
+trait DependencyInjectionCapabilities
+{
+    /**
+     * @Inject("\Di\Container");
+     */
+    protected $factory;
+
+    /**
+     * @param $className
+     * @return mixed
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
+     */
+    public function make($className)
+    {
+        return $this->factory->make($className);
+    }
+
+}

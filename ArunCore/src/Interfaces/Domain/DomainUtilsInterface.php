@@ -19,25 +19,34 @@
  * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
  *
  *
- * Date: 15/10/18
- * Time: 13.03
+ * Date: 17/10/18
+ * Time: 19.09
  */
 
-namespace App\Managers\Cmd;
+namespace ArunCore\Interfaces\Domain;
 
-use ArunCore\Abstracts\BaseDomainCommand;
-use ArunCore\Traits\CmdManagers\DependencyInjectionCapabilities;
-
-abstract class DomainCommand extends BaseDomainCommand
+interface DomainUtilsInterface
 {
-    use DependencyInjectionCapabilities;
+    /**
+     * Check if the number of parameters from command line
+     * is the same required from DOMAIN:ACTION class
+     * @param string $className
+     * @param string $action
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    public function numberOfMandatoryParameters(string $className, string $action);
 
     /**
-     * Default help when undefined
+     * Recast all command line parameters to the class parameters that
+     * corresponds to DOMAIN:ACTION required from CLI
+     * @param string $className
+     * @param string $action
+     * @param array $realParameters
+     *
+     * @return array
+     * @throws \ReflectionException
+     * @throws \Exception
      */
-    public function help()
-    {
-        echo "No available help for this command\r\n";
-    }
-
+    public function getReCastedParameters(string $className, string $action, array $realParameters): array;
 }

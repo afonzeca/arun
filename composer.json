@@ -12,7 +12,7 @@
   "autoload": {
     "psr-4": {
       "App\\": "app/",
-      "BosunCore\\": "bosunCore/src/"
+      "ArunCore\\": "ArunCore/src/"
     }
   },
   "require-dev": {

@@ -18,10 +18,32 @@
  *
  * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
  *
- * Arun Application Container - Set here your services (see core.php for example)
  *
- * Date: 27/09/18
- * Time: 13.20
+ * This Contract defines how two methods for creating the complete namespace path and class names which corresponds
+ * to the DOMAIN and ACTION required
+ *
+ * Date: 17/10/18
+ * Time: 18.32
  */
 
-return [];
+namespace ArunCore\Interfaces\Domain;
+
+interface DomainActionNameGeneratorInterface
+{
+    /**
+     * Get the Whitelist
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public function getDomainWhiteList(): array;
+
+    /**
+     * Check for the correct DOMAIN:ACTION required from command line according to whitelist
+     * and then generate the NAMESPACE CLASSNAME AND ACTION for calling
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public function getClassAndMethodNamesForCalling(): array;
+}

@@ -18,10 +18,16 @@
  *
  * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
  *
- * Arun Application Container - Set here your services (see core.php for example)
- *
- * Date: 27/09/18
- * Time: 13.20
+ * Date: 21/09/18
+ * Time: 18.01
  */
 
-return [];
+namespace ArunCore\Interfaces\Domain;
+
+interface DomainInterface
+{
+    /**
+     * @return mixed
+     */
+    public function help();
+}

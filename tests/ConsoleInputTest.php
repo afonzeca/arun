@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of "Bosun - CLI Php Microframework" released under the following terms
+ * This file is part of "Arun - CLI Php Microframework" released under the following terms
  *
  * Copyright 2018 Angelo FONZECA ( https://www.linkedin.com/in/angelo-f-1806868/ )
  *
@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/bosun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
  *
  *
  * UnitTest for the ConsoleInput class
@@ -24,9 +24,9 @@
  */
 
 use PHPUnit\Framework\TestCase;
-use BosunCore\Core\IO\ConsoleInput;
+use ArunCore\Core\IO\ConsoleInput;
 
-use BosunCore\Interfaces\IO\ConsoleInputInterface;
+use ArunCore\Interfaces\IO\ConsoleInputInterface;
 
 class ConsoleInputTest extends TestCase
 {
@@ -39,7 +39,7 @@ class ConsoleInputTest extends TestCase
     public function setUp()
     {
         $this->fakeParameters = [
-            "bosun",
+            "Arun",
             "car:check",
             "Red",
             "Sport",
@@ -217,7 +217,7 @@ class ConsoleInputTest extends TestCase
     public function checkIfADomainOrActionAreNotInfluencedByWhiteList()
     {
         $fakeParameters = [
-            "bosun",
+            "Arun",
             "car:x",
         ];
 
@@ -235,7 +235,7 @@ class ConsoleInputTest extends TestCase
     public function checkIfDefaultAndHelpValuesAreSetIfDomainAndActionAreNotPresent()
     {
         $fakeParameters = [
-            "bosun",
+            "Arun",
         ];
 
         // Gets a new instance despite the setUp method
@@ -252,7 +252,7 @@ class ConsoleInputTest extends TestCase
     public function checkIfDomainAndDefaultValuesAreSetIfDomainOnlyIsSpecified()
     {
         $fakeParameters = [
-            "bosun",
+            "Arun",
             "car"
         ];
 

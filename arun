@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /**
  * This file is part of "Arun - CLI Php Microframework" released under the following terms
@@ -18,10 +19,26 @@
  *
  * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
  *
- * Arun Application Container - Set here your services (see core.php for example)
+ * Arun application runner
  *
- * Date: 27/09/18
- * Time: 13.20
+ * @author Angelo Fonzeca
+ * @date 26/09/2018
+ * @license Apache 2.0
  */
 
-return [];
+$container = require __DIR__ . "/kickstart/kickstart.php";
+
+/**
+ * bootstrap
+ */
+try {
+
+    $App = new \ArunCore\Core\App();
+    $App->setContainer($container);
+    $App->run();
+
+} catch (\Exception $ex) {
+
+    printf("\r\nArun EXCEPTION: %s\r\n\r\n", $ex->getMessage());
+
+}

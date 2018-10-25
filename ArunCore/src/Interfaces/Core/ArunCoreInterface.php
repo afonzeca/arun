@@ -18,10 +18,17 @@
  *
  * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
  *
- * Arun Application Container - Set here your services (see core.php for example)
  *
- * Date: 27/09/18
- * Time: 13.20
+ * Date: 12/10/18
+ * Time: 9.56
  */
+namespace ArunCore\Interfaces\Core;
 
-return [];
+interface ArunCoreInterface
+{
+    /**
+     * @return void
+     * @throws \Exception
+     */
+    public function start(): void;
+}

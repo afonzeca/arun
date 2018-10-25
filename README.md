@@ -1,46 +1,46 @@
-**"Bosun" (CLI Php Microframework) - Version 0.2alpha - (C) 2018 by Angelo Fonzeca**
+## "Arun" (CLI Microframework) for PHP7.2+ - Version 0.3-alpha - (C) 2018 by Angelo Fonzeca
 
-**What is Bosun?**
+### What is Arun?
 
-Bosun is a microframework for easily developing "console applications" written in PHP OOP. It is quite different from other similar
-frameworks/libraries (Like Symfony Console component, Silly, etc.) because Bosun uses "Convention Over Configuration" for
+Arun is a microframework for easily developing "console applications" written in PHP OOP. It is quite different from other similar
+frameworks/libraries (Like Symfony Console component, Silly, etc.) because Arun uses "Convention Over Configuration" for
 managing commands and associated code (your console application). 
 
-The Bosun Microframework has an "out-of-the-box" native support for Dependency Injection by using Containers and Autowire 
+The Arun Microframework has an "out-of-the-box" native support for Dependency Injection by using Containers and Autowire 
 (thanks to PHP-DI) and an organized tree for easily write your code in a simple way.
 
 _DISCLAIMER: This product is a prototype at early stage of development and could have security issues... DO NOT USE IN PRODUCTION ENVIRONMENTS_
 
-**It's magic!** 
+### It is magic! 
 
 You create a class in a specific directory (e.g. "app/Managers/Cmd/CommandNameDomain.php") which extends a specific
 "DomainCommand" class, then you define your methods with your code inside, type hinting every parameter (recommended), set a default value for optional parameters... and you have a new command that you can call from CLI as follow:
 
 ```bash
-./bosun YOURCLASSNAME:YOURMETHOD param1 param2 \[param3\] \[param4=withdefaultvalue\]
+./arun YOURCLASSNAME:YOURMETHOD param1 param2 \[param3\] \[param4=withdefaultvalue\]
 ```
 
 You can also use options (-i --u=username --password=something --check ).
 
-_NOTE: YOURCLASSNAME is called "DOMAIN" and YOURMETHOD is called "ACTION" in the Bosun universe..._
+_NOTE: YOURCLASSNAME is called "DOMAIN" and YOURMETHOD is called "ACTION" in the Arun universe..._
 
-Bosun will do all the job for you... When invoked, it instantiate an object which corresponds to "DOMAIN", and calls
+Arun will do all the job for you... When invoked, it instantiate an object which corresponds to "DOMAIN", and calls
 the Method of the class that corresponds to "ACTION". 
 
 Every parameter from CLI is directly mapped to each parameter of the DOMAIN/ACTION method itself thanks to the PHP reflection. 
 The parameters are also "casted" according to the specified type during the method declaration.
 
-Another magic inside Bosun is that you have a Dependency Container support (Php-Di) so you can easily inject Services inside your classes.
+Another magic inside Arun is that you have a Dependency Container support (Php-Di) so you can easily inject Services inside your classes.
 
-The last but not the least, Bosun can generate an help file "Automatically" for each DOMAIN. You can also add additional information
+The last but not the least, Arun can generate an help file "Automatically" for each DOMAIN. You can also add additional information
 thanks to a simple array that can be configured with optional parameters (in the next release it will be included the "Doctrine Annotation"
 support so the use of the descriptions inside the array will be deprecated).
 
 
-**Why Bosun was born?**
+### Why Arun was born?
 
-Bosun was born as a tool for creating a full working framework called "Sensuikan" on which I'm working on. Anyway during development I realized
-that Bosun could be used as component a-part from the main project. So I made the "Bosun Microframework Package".
+Arun was born as tool for creating a full working framework called "Sensuikan" on which I'm working on. Anyway during development I realized
+that Arun could be used as component a-part from the main project. So I made the "Arun Microframework Package".
 
 It can be useful when:
 
@@ -50,20 +50,20 @@ well organized project... Out of the box!)
 2) You need to re-organize/aggregate your cli legacy code inside a more robust project without spending your time for managing command line,
 parameters, value mapping, etc.
 
-3) As base for writing your own framework... Bosun can be a good candidate for realizing tools like "Composer", "Laravel Artisan", etc.
+3) As base for writing your own framework... Arun can be a good candidate for realizing tools like "Composer", "Laravel Artisan", etc.
 
 4) You want to write workers or services in PHP that can be called from your cron, command line scripts, etc.
 
 Anyway... Too much words... Now Let's some code... ;-)
 
-**How to install**
+### How to install
 
 You need php 7.2, Composer and Git installed on your machine (for now tested only on Linux/Ubuntu/Mint).
 
 Git clone the repository 
 
 ```bash
-git clone https://github.com/afonzeca/bosun.git
+git clone https://github.com/afonzeca/arun.git
 ```
 
 and run 
@@ -72,20 +72,21 @@ and run
 composer install 
 ```
 
-inside the created "bosun" folder!
+inside the created "arun" folder!
 
-In the next releases I will split the bosun core from the framework "boilerplate" and I will publish
-everything on Packagist.org so Composer can be used for creating Bosun Projects!
+In the next releases I will split the Arun core from the framework "boilerplate" and I will publish
+everything on Packagist.org so Composer can be used for creating Arun Projects!
  
 _DISCLAIMER: This product is a prototype at early stage of development and could have security issues... DO NOT USE IN PRODUCTION ENVIRONMENTS_
 
+### Examples
 
 **Example 1 - Basic application** 
 
 We want to implement the following command:
 
 ```bash
-./bosun table:create users
+./arun table:create users
 ```
 
 so you need to do the following actions:
@@ -203,13 +204,13 @@ The help method will be automatically called if parameters for the method are wr
 Now you can call your new command with
 
 ```bash
-./bosun table:create users 
+./arun table:create users 
 ```
 
-Bosun will to the job for you...
+Arun will to the job for you...
 
 
-**Example 2 - Optional Parameters **
+**Example 2 - Optional Parameters**
 
 It easy to set optional parameters... Type hint your method parameter and set a default value... for example:
 
@@ -231,12 +232,12 @@ It easy to set optional parameters... Type hint your method parameter and set a 
 }
 ```
 
-Now you can call Bosun with one, two, or three parameters...
+Now you can call Arun with one, two, or three parameters...
 
-If you type ./bosun table:create without parameters you will receive an automatic help... like this:
+If you type ./arun table:create without parameters you will receive an automatic help... like this:
 
 ```
-Bosun Microframework 0.2alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
+Arun Microframework 0.3-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
 
 Table: Table creation
 
@@ -252,10 +253,10 @@ create
 
 ```
 
-if you type ./bosun without commands, actions, etc. you will receive a "global help" like this:
+if you type ./arun without commands, actions, etc. you will receive a "global help" like this:
 
 ```
-Bosun Microframework 0.2alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
+Arun Microframework 0.3-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
 
 Default: A Convention Over Configuration CLI Micro-Framework
 
@@ -271,14 +272,14 @@ Available DOMAINS (set of aggregate commands) are:
 
   table: Table creation
 
-Please write ./bosun DOMAIN:help to list the ACTIONS available for a DOMAIN
+Please write ./arun DOMAIN:help to list the ACTIONS available for a DOMAIN
 
 ```
 
 
 ***Example 3 - Let's use Options (like --i --value="xyz" --check-db -u="root")***
 
-Bosun supports options (short and long) but only in the format -i=something and --optionIlike=something, the format
+arun supports options (short and long) but only in the format -i=something and --optionIlike=something, the format
 without "=" is not supported (e.g. '-i something').
 
 You can use your options whenever you want (behind, in the middle or the end of DOMAIN:ACTION).
@@ -286,9 +287,9 @@ You can use your options whenever you want (behind, in the middle or the end of 
 Commands like these are all valid:
 
 ```
-.\bosun table:create bills id1 db2 -i --pk="id" --create-fks -u="root" 
+.\arun table:create bills id1 db2 -i --pk="id" --create-fks -u="root" 
 
-.\bosun -i --pk="id" --create-fks table:create -i bills id1 db2 -u="root" 
+.\arun -i --pk="id" --create-fks table:create -i bills id1 db2 -u="root" 
 
 ```
 
@@ -318,7 +319,7 @@ In our previous example add the following code to the "create" method above
 The output will be:
 
 ```
-./bosun -i --pk="id" --create-fks -u bills x abc -u="root" 
+./arun -i --pk="id" --create-fks -u bills x abc -u="root" 
  
 Default Db abc
 Primary key x
@@ -329,11 +330,11 @@ The value of -u is root
 
 **Example 4 - How to inject something**
 
-Bosun also supports dependency injection from container.
+Arun also supports dependency injection from container.
 
 Inside the folder "containers" you will find:
 
-1) core.php which contains internal reference to internal services that helps Bosun working
+1) core.php which contains internal reference to internal services that helps Arun working
 2) app.php which allows you to define and use your services (and inject them via di container and php-di)
 
 So, edit the file container/app.php... It contains an empty array... now I explain how to fill it! 
@@ -429,7 +430,7 @@ class TableDomain extends DomainCommand
 }
 ```
 
-In other word, the LoggerInterface (the right way!) is required inside the constructor and it will injected by Bosun via
+In other word, the LoggerInterface (the right way!) is required inside the constructor and it will injected by Arun via
  di-container when the application starts! 
 
 Thanks to the constructor, the logger object is stored inside the $logger properties so it accessible from other methods. 
@@ -443,7 +444,7 @@ protected $logger;
     }
 ```
 
-Thanks to the following code inside the "create" method, every time the bosun is called with "-l", a line into the log
+Thanks to the following code inside the "create" method, every time the Arun is called with "-l", a line into the log
 is written with its parameters:
 
 ```php
@@ -452,10 +453,10 @@ is written with its parameters:
         }
 ```
 
-if you run bosun the result will be:
+if you run Arun the result will be:
 
 ```
-./bosun -i --pk="id" --create-fks -u="root" table:create -p bills x abc -u="root" -l="Test1"
+./arun -i --pk="id" --create-fks -u="root" table:create -p bills x abc -u="root" -l="Test1"
 
 Default Db abc
 Primary key x
@@ -466,29 +467,29 @@ The value of -u is root
 
 If you check for your app/var/mylog.log, you will find the falue of the "-l" option (Test1). 
 
-For further information regarding the use of Dependency Injection inside Bosun please refer to https://PHP-DI.org/ 
+For further information regarding the use of Dependency Injection inside Arun please refer to https://PHP-DI.org/ 
 by Matthieu Napoli and contributors.
 
 
-**Configuration File Support**
+### Configuration File Support
 
-For statical configuration, Bosun uses the config/config.php file accessible via the global function "conf()".
+For statical configuration, Arun uses the config/config.php file accessible via the global function "conf()".
 
 Anyway it supports "out-of-the-box" the ".env" files, thank to the library from PhpDotEnv by VLucas (https://github.com/vlucas/phpdotenv)
 
-In particular refer to .envcli file for configuring Bosun!
+In particular refer to .envcli file for configuring Arun!
 
 If you need to improve the .envcli file with your parameters, use getenv("KEY") inside your code where "KEY" is the key of your env variable.
 
 
-**Other Information**
+### Notes
 
-Bosun has many undocumented functions, internals and other useful things... ASAP the documentation will be improved! ;-)  
+Arun has many undocumented functions, internals and other useful things... ASAP the documentation will be improved! ;-)  
 
 
-**What about the internal Bosun Engine?**
+### What about the internal Arun Engine?
 
-When you call Bosun, it does the following (It's not Black Magic :D)
+When you call Arun, it does the following (It's not Black Magic :D)
 
 1) Configures and get di DI Container, starts the "ConsoleInput" and processes the parameters  
 2) Check the white list to verify that the DOMAIN:ACTION received from CLI can be called
@@ -496,20 +497,20 @@ When you call Bosun, it does the following (It's not Black Magic :D)
 4) Make some security checks on parameters (e.g. strips some characters and other checks) - CODE WRITTEN BUT NOT SUPPORTED YET
 5) By using reflection analyzes the structure of the ACTION requests (e.g. type hinting of parameters and number of them)
 6) Gets the class corresponding to DOMAIN (in our case "table"), uses a factory to instantiate it and the call method "ACTION" (e.g. "create")
-7) Inside the method ACTION bosun injects the parameters passed (and if required also dependencies from container)
+7) Inside the method ACTION Arun injects the parameters passed (and if required also dependencies from container)
 8) The method called "ACTION" is called...
 9) If something wrong a contextual help will be displayed (by using reflection it will describe the DOMAIN and ACTIONS according to the parameters passed)
 
-Bosun is written using S.O.L.I.D. principles, some 12factors principles and full OOP approach! Feel free to browse the code, it's full documented!
+Arun is written using S.O.L.I.D. principles, some 12factors principles and full OOP approach! Feel free to browse the code, it's full documented!
 
 _Note for developers_
 
 I prepared a phpunit.xml file so you can use PhpUnit and PhpUnitWatcher from Spatie during development out of the box!
 
-I also made some UT, you will find it in the tests directory so you can understand better how Bosun works!
+I also made some UT, you will find it in the tests directory so you can understand better how Arun works!
 
 
-**What's next?**
+### What's next?
 
 The next release will hopefully includes:
 
@@ -517,13 +518,13 @@ The next release will hopefully includes:
 2) Support for full color, tables and fancy things for outputting information
 3) Security improvements
 4) Some code refactoring
-5) Support for creating Bosun Classes (DOMAINs) with internal DOMAIN/ACTIONS... You don't need to copy and paste anymore from this docs!
+5) Support for creating Arun Classes (DOMAINs) with internal DOMAIN/ACTIONS... You don't need to copy and paste anymore from this docs!
 6) More complete and full Unit Tests
 
 
-**License Info**
+### License Info
 
-This file is part of "Bosun - CLI Php Microframework" released under the following terms
+This file is part of "Arun - CLI Php Microframework" released under the following terms
 
 Copyright 2018 Angelo FONZECA ( https://www.linkedin.com/in/angelo-f-1806868/ )
 
@@ -540,7 +541,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 
-**Thanks to...**
+### Thanks to...
 
 My lovely wife Carla! ILY
 
@@ -550,12 +551,18 @@ Heavy Metal
 
 Sir Clive Sinclair, Tony Tebby, Adriano Olivetti, Brian Kernighan and Dennis Ritchie... they are the real IT heroes!
 
+### About releases
 
-**Contacts**
+Project link: https://github.com/afonzeca/arun
+
+(Previous project link: https://github.com/afonzeca/bosun )
+
+See changelog.txt inside the package for details about framework improvements.
+
+### Contacts
 
 Linkedin contact https://www.linkedin.com/in/angelo-f-1806868/
 
-Project link: https://github.com/afonzeca/bosun
 
-Thank you so much for your interest in Bosun!
+Thank you so much for your interest in Arun!
 Angelo Fonzeca

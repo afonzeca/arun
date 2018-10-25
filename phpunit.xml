@@ -24,7 +24,7 @@
         <ini name="display_errors" value="true"/>
     </php>
     <testsuites>
-        <testsuite name="Bosun-Tests">
+        <testsuite name="Arun-Tests">
             <directory suffix="Test.php">./tests/</directory>
         </testsuite>
     </testsuites>

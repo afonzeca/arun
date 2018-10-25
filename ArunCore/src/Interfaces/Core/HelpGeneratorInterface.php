@@ -18,10 +18,25 @@
  *
  * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
  *
- * Arun Application Container - Set here your services (see core.php for example)
- *
- * Date: 27/09/18
- * Time: 13.20
+ * Date: 18/10/18
+ * Time: 20.42
  */
 
-return [];
+namespace ArunCore\Interfaces\Core;
+
+interface HelpGeneratorInterface
+{
+    /**
+     * Generate the correct help for a Domain (set of aggregated commands). Help is uniq for all Action (commands)
+     * owned by a Domain.
+     *
+     * The classInstance parameters allows to inspect the class methods and their syntax for checking number of parameters, type,
+     * and optional flags
+     *
+     * @param $domain
+     * @param $classInstance
+     *
+     * @throws \ReflectionException
+     */
+    public function makeHelpMessage($domain, $classInstance, $global = false);
+}

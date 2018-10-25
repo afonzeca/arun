@@ -19,31 +19,44 @@
  * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
  *
  *
- * This is the default class called when Arun in started without parameters
- *
- * Date: 18/10/18
- * Time: 17.40
+ * Date: 11/10/18
+ * Time: 16.03
  */
 
-namespace App\Managers\Cmd;
+namespace ArunCore\Interfaces\Security;
 
-class DefaultDomain extends DomainCommand
+interface SanitizerInterface
 {
     /**
-     * @throws \ReflectionException
+     * Strip unauthorized chars from array
+     *
+     * @param array $parameters
+     * @return array
      */
-    public function help()
-    {
-        $this->helpGen->makeHelpMessage("default", self::class, true);
-    }
+    public function stripBadCharsFromArray(array $parameters, array $optionalChars = []): array;
 
     /**
-     * Replace with your code if need
+     * Strip unauthorized chars from string
      *
-     * @throws \ReflectionException
+     * @param string $parameter []
+     * @param array $optionalChars
+     * @return string
      */
-    public function default()
-    {
-        $this->help();
-    }
+    public function stripBadChars(string $parameter, array $optionalChars = []): string;
+
+    /**
+     * Check CLASS name (according to the definition from PHP Manual)
+     *
+     * @param string $className
+     * @return bool
+     */
+    public function isClassNameValid(string $className): bool;
+
+    /**
+     * Check correct filename passed
+     *
+     * @param $parameter
+     * @return bool
+     */
+    public function isFilenameValid($parameter): bool;
 }

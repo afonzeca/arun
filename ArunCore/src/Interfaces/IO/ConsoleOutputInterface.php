@@ -18,10 +18,20 @@
  *
  * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
  *
- * Arun Application Container - Set here your services (see core.php for example)
  *
- * Date: 27/09/18
- * Time: 13.20
+ * Minimal output generator contract
+ *
+ * Date: 18/10/18
+ * Time: 19.52
  */
 
-return [];
+namespace ArunCore\Interfaces\IO;
+
+interface ConsoleOutputInterface
+{
+    public function write(string $string);
+
+    public function writeln(string $string);
+
+    public function blank();
+}

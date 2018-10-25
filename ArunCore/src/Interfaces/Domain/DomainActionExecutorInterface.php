@@ -18,10 +18,31 @@
  *
  * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
  *
- * Arun Application Container - Set here your services (see core.php for example)
  *
- * Date: 27/09/18
- * Time: 13.20
+ * Date: 17/10/18
+ * Time: 18.35
  */
 
-return [];
+namespace ArunCore\Interfaces\Domain;
+
+interface DomainActionExecutorInterface
+{
+    /**
+     * Get DOMAIN:ACTION and parameters processed from a Class which adheres to DomainActionNameGeneratorInterface
+     * check if the number of parameters from cli corresponds to class parameters that manages the DOMAIN:ACTION
+     * This EXEC method uses Factory for making the Class (because DOMAINS are not services, we do not store them into the
+     * container)
+     *
+     * @param $className
+     * @param $action
+     *
+     * @throws \Exception
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
+     * @throws \ReflectionException
+     *
+     * @return bool
+     */
+
+    public function exec($className, $action): bool;
+}

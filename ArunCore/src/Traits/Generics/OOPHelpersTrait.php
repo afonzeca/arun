@@ -18,10 +18,36 @@
  *
  * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
  *
- * Arun Application Container - Set here your services (see core.php for example)
- *
- * Date: 27/09/18
- * Time: 13.20
+ * Date: 24/09/18
+ * Time: 19.13
  */
 
-return [];
+namespace ArunCore\Traits\Generics;
+
+use \ReflectionFunction;
+
+trait OOPHelpersTrait
+{
+    /**
+     * @param Closure $theClosure
+     * @return bool
+     * @throws \ReflectionException
+     */
+    private function isClosure($theClosure): bool
+    {
+        return (bool)(new ReflectionFunction($theClosure))->isClosure();
+    }
+
+    /**
+     * @param string $className
+     * @return bool
+     * @throws \ReflectionException
+     */
+    public function implementsInterface(string $className, string $interfaceName): bool
+    {
+        $class = new \ReflectionClass($className);
+        return $class->implementsInterface($interfaceName);
+    }
+
+
+}

@@ -1,5 +1,5 @@
 #
-# [ This file is part of "Bosun - CLI Php Microframework" released under the following terms - (C) 2018 by Angelo Fonzeca - The present code is released under Apache License Version 2.0 ]
+# [ This file is part of "Arun - CLI Php Microframework" released under the following terms - (C) 2018 by Angelo Fonzeca - The present code is released under Apache License Version 2.0 ]
 #
 # [ Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ )                              ]
 #
@@ -8,7 +8,7 @@
 #
 # APPLICATION NAME
 #
-APP_NAME="BOSUN"
+APP_NAME="Arun"
 
 #
 # COMMAND WHITELIST FILE (without PHP and FULL OR RELATIVE PATH)
@@ -18,7 +18,7 @@ APP_NAME="BOSUN"
 # WHITELIST CONFIGURATION
 #
 WHITELIST_NAME="whiteList"
-APP_VERSION="0.2alpha"
+APP_VERSION="0.3alpha"
 
 #
 # COMMAND LINE COLORS (0 = disabled, 1 = enabled)

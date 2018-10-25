@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of "Bosun - CLI Php Microframework" released under the following terms
+ * This file is part of "Arun - CLI Php Microframework" released under the following terms
  *
  * Copyright 2018 Angelo FONZECA ( https://www.linkedin.com/in/angelo-f-1806868/ )
  *
@@ -16,10 +16,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/bosun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
  *
  *
- * Low level startup... for OOP code see BosunCore ;-)
+ * Low level startup... for OOP code see ArunCore ;-)
  *
  * Date: 28/09/18
  * Time: 11.38
@@ -35,7 +35,7 @@ require __DIR__ . "/../vendor/autoload.php";
 /**
  * Load Application Helpers
  */
-require __DIR__ . "/../app/Helpers/basicHelpers.php";
+require __DIR__ . "/../app/Helpers/Conf.php";
 
 /**
  * Initialize ENV

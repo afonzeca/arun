@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of "Bosun - CLI Php Microframework" released under the following terms
+ * This file is part of "Arun - CLI Php Microframework" released under the following terms
  *
  * Copyright 2018 Angelo FONZECA ( https://www.linkedin.com/in/angelo-f-1806868/ )
  *
@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/bosun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
  *
  *
  * UnitTest class for checking the correct generation of the class that manages a DOMAIN required
@@ -45,7 +45,7 @@ class CheckClassNameGeneratorForCallingDomainObjectsTest extends TestCase
     public function setUp()
     {
         $this->fakeParameters = [
-            "bosun",
+            "Arun",
             "car:check",
             "Red",
             "Sport",
@@ -116,12 +116,12 @@ class CheckClassNameGeneratorForCallingDomainObjectsTest extends TestCase
      */
     private function getGeneratorAccordingToWhiteListAndDomainAction($parameters, $whiteListCustom): \PHPUnit\Framework\MockObject\MockObject
     {
-        $consoleInput = $this->getMockBuilder("BosunCore\Core\IO\ConsoleInput")
+        $consoleInput = $this->getMockBuilder("ArunCore\Core\IO\ConsoleInput")
             ->setConstructorArgs([$parameters])
             ->setMethods(null)
             ->getMock();
 
-        $nameGenerator = $this->getMockBuilder("BosunCore\Core\Domain\DomainActionNameGenerator")
+        $nameGenerator = $this->getMockBuilder("ArunCore\Core\Domain\DomainActionNameGenerator")
             ->setConstructorArgs(["/fakeWhitListName", "/fakeBasePath", $consoleInput])
             ->setMethods(["getWhiteList"])
             ->getMock();

@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of "Arun - CLI Php Microframework" released under the following terms
+ * This file is part of "This file is part of "Arun - CLI Php Microframework" released under the following terms" released under the following terms
  *
  * Copyright 2018 Angelo FONZECA ( https://www.linkedin.com/in/angelo-f-1806868/ )
  *
@@ -18,10 +18,30 @@
  *
  * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
  *
- * Arun Application Container - Set here your services (see core.php for example)
- *
- * Date: 27/09/18
- * Time: 13.20
  */
 
-return [];
+/**
+ * Get the configuration from the config.php file
+ *
+ * @param $key
+ * @return mixed
+ *
+ * TODO: I promise... on the next release the first thing is to Namespace it! ;-)
+ */
+
+namespace App\Helpers\Conf;
+
+function get($key)
+{
+    $env = (array)(require __DIR__ . "/../../config/config.php");
+
+    try {
+        if (!array_key_exists($key, $env)) {
+            throw new Exception("No existing key", -1);
+        }
+    } catch (Exception $ex) {
+        echo $ex->getMessage();
+    }
+
+    return $env[$key];
+}
