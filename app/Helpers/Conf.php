@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of "This file is part of "Arun - CLI Php Microframework" released under the following terms" released under the following terms
+ * This file is part of "This file is part of "Arun - CLI Microframework for Php7.2+" released under the following terms" released under the following terms
  *
  * Copyright 2018 Angelo FONZECA ( https://www.linkedin.com/in/angelo-f-1806868/ )
  *
