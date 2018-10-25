@@ -1,4 +1,4 @@
-**"Bosun" (CLI Php Microframework) - (C) 2018 by Angelo Fonzeca**
+**"Bosun" (CLI Php Microframework) - Version 0.2alpha - (C) 2018 by Angelo Fonzeca**
 
 **What is Bosun?**
 
@@ -9,6 +9,7 @@ managing commands and associated code (your console application).
 The Bosun Microframework has an "out-of-the-box" native support for Dependency Injection by using Containers and Autowire 
 (thanks to PHP-DI) and an organized tree for easily write your code in a simple way.
 
+_DISCLAIMER: This product is a prototype at early stage of development and could have security issues... DO NOT USE IN PRODUCTION ENVIRONMENTS_
 
 **It's magic!** 
 
