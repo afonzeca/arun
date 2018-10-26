@@ -54,7 +54,7 @@ parameters, value mapping, etc.
 
 4) You want to write workers or services in PHP that can be called from your cron, command line scripts, etc.
 
-Anyway... Too much words... Now Let's some code... ;-)
+Anyway... Too much words... Let's code... ;-)
 
 ### How to install
 
