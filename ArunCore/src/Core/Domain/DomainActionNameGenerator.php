@@ -210,7 +210,7 @@ class DomainActionNameGenerator implements DomainActionNameGeneratorInterface
             $action = "help";
         }
 
-        $className = sprintf("\\App\\Managers\\Cmd\\%sDomain", ucfirst($domain));
+        $className = sprintf("\\App\\Console\\Domains\\%sDomain", ucfirst($domain));
 
         return [$className, $domain, $action];
     }

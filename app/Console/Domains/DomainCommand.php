@@ -23,11 +23,10 @@
  * Time: 13.03
  */
 
-namespace App\Managers\Cmd;
+namespace App\Console\Domains;
 
 use ArunCore\Abstracts\BaseDomainCommand;
 use ArunCore\Core\Domain\DomainActionNameGenerator;
-use ArunCore\Traits\CmdManagers\DependencyInjectionCapabilities;
 
 use ArunCore\Annotations as SET;
 

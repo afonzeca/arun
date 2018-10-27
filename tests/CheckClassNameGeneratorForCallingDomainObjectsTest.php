@@ -88,7 +88,7 @@ class CheckClassNameGeneratorForCallingDomainObjectsTest extends TestCase
 
         $classAndMethodNamesForCalling = $nameGenerator->getClassAndMethodNamesForCalling();
 
-        $this->assertEquals("\\App\\Managers\\Cmd\\CarDomain", $classAndMethodNamesForCalling[0]);
+        $this->assertEquals("\\App\\Console\\Domains\\CarDomain", $classAndMethodNamesForCalling[0]);
         $this->assertEquals("check", $classAndMethodNamesForCalling[1]);
     }
 
@@ -104,7 +104,7 @@ class CheckClassNameGeneratorForCallingDomainObjectsTest extends TestCase
 
         $classAndMethodNamesForCalling = $nameGenerator->getClassAndMethodNamesForCalling();
 
-        $this->assertEquals("\\App\\Managers\\Cmd\\CarDomain", $classAndMethodNamesForCalling[0]);
+        $this->assertEquals("\\App\\Console\\Domains\\CarDomain", $classAndMethodNamesForCalling[0]);
         $this->assertEquals("help", $classAndMethodNamesForCalling[1]);
     }
 

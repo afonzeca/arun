@@ -161,13 +161,13 @@ NOTE: In the next releases the whitelist will be deprecated in favor of more rob
 
 _Step 2_
 
-Inside the folder app/Managers/Cmd you need to add a class called TableDomain.php, with namespace App\Managers\Cmd 
+Inside the folder app/Managers/Cmd you need to add a class called TableDomain.php, with namespace App\Console\Domains 
 , and that extends the DomainCommand base class:
 
 ```php
 <?php
 
-namespace App\Managers\Cmd;
+namespace App\Console\Domains;
 
 class TableDomain extends DomainCommand
 {
@@ -381,7 +381,7 @@ Now in your TableDomain.php replace the content with the following code:
 ```php
 <?php
 
-namespace App\Managers\Cmd;
+namespace App\Console\Domains;
 
 class TableDomain extends DomainCommand
 {

@@ -25,7 +25,7 @@
  * Time: 17.40
  */
 
-namespace App\Managers\Cmd;
+namespace App\Console\Domains;
 
 use ArunCore\Annotations as SET;
 use ArunCore\Core\Domain\DomainActionNameGenerator;
@@ -36,7 +36,7 @@ use ArunCore\Core\Domain\DomainActionNameGenerator;
  * @SET\DomainEnabled(true)
  * @SET\DomainSyn("This is the default class when you call arun without domain and actions")
  *
- * @package App\Managers\Cmd
+ * @package App\Console\Domains
  */
 class DefaultDomain extends DomainCommand
 {

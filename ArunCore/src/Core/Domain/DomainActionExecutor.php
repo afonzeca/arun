@@ -117,7 +117,7 @@ class DomainActionExecutor implements DomainActionExecutorInterface
             }
         }
 
-        $this->makeObjectAndRunMethod("App\Managers\Cmd\DefaultDomain", "help", []);
+        $this->makeObjectAndRunMethod("App\Console\Domains\DefaultDomain", "help", []);
 
         return false;
     }

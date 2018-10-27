@@ -275,7 +275,7 @@ class ReflectionHelpers implements ReflectionHelpersInterface
      */
     public function makeDomainFQDN(string $domain): string
     {
-        return sprintf("\App\Managers\Cmd\%s%s", ucfirst($domain), "Domain");
+        return sprintf("\App\Console\Domains\%s%s", ucfirst($domain), "Domain");
     }
 
 }
