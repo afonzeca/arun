@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  *
  * Basic Output Console class
@@ -36,9 +36,10 @@ class ConsoleOutput implements ConsoleOutputInterface
 
     /**
      * ConsoleOutput constructor.
-     * @param $enableColors
+     *
+     * @param string $enableColors
      */
-    public function __construct($enableColors)
+    public function __construct(string $enableColors)
     {
         $this->enableColors = (bool)$enableColors;
     }

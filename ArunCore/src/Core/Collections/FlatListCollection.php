@@ -20,29 +20,35 @@
  *
  */
 
-namespace ArunCore\Annotations;
+namespace ArunCore\Core\Collections;
 
-/**
- * @Annotation
- * @Target("CLASS")
- *
- * Action Synopsis - Action functionality description for CLI help
- *
- */
-class DomainSyn
+use ArunCore\Abstracts\GenericMixedCollectionAbstract;
+use ArunCore\Traits\Generics\OOPHelpersTrait;
+
+class FlatListCollection extends GenericMixedCollectionAbstract
 {
-    /**
-     * @var string
-     */
-    public $synopsis;
+
+    use OOPHelpersTrait;
 
     /**
-     * DomainSyn constructor.
-     * @param array $synopsis
+     * @param string $element
+     * @param string $nameId
+     *
+     * @return void
+     *
+     * @throws \Exception
      */
-    public function __construct(array $synopsis)
+    public function set(string $element, string $nameId = null): void
     {
-        $this->synopsis = $synopsis["value"];
+        parent::set($element, $nameId);
+    }
+
+    /**
+     * @return bool
+     */
+    public function valid()
+    {
+        return (($this->current() !== null && $this->current() !==false) ? true : false);
     }
 
 }

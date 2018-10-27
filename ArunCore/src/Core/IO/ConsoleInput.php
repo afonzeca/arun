@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  *
  * Process the CLI DOMAIN:ACTION, parameters and options
@@ -81,9 +81,7 @@ class ConsoleInput implements ConsoleInputInterface
      * @param array $args (the whole arguments from command line)
      * @throws \Exception
      */
-    public function __construct(
-        array $args
-    )
+    public function __construct(array $args)
     {
         $this
             ->setRawsArgs($args)
@@ -156,7 +154,7 @@ class ConsoleInput implements ConsoleInputInterface
     }
 
     /**
-     * @param $key
+     * @param string $key
      * @return string | null
      */
     public function getShortOptionValuedOnly($key)
@@ -181,7 +179,7 @@ class ConsoleInput implements ConsoleInputInterface
     }
 
     /**
-     * @param $key
+     * @param string $key
      * @return string | null
      */
     public function getLongOptionValuedOnly($key)
@@ -206,7 +204,7 @@ class ConsoleInput implements ConsoleInputInterface
     }
 
     /**
-     * @param $key
+     * @param string $key
      * @return bool
      */
     public function hasLongOptionVoid($key): bool
@@ -215,7 +213,7 @@ class ConsoleInput implements ConsoleInputInterface
     }
 
     /**
-     * @param $key
+     * @param string $key
      * @return bool
      */
     public function hasShortOptionVoid($key): bool
@@ -245,7 +243,7 @@ class ConsoleInput implements ConsoleInputInterface
     }
 
     /**
-     * @param $key
+     * @param string $key
      * @return string | null
      */
     public function getOption($key)
@@ -258,7 +256,7 @@ class ConsoleInput implements ConsoleInputInterface
     }
 
     /**
-     * @param $key
+     * @param string $key
      * @return bool
      */
     public function hasOption($key): bool
@@ -304,10 +302,11 @@ class ConsoleInput implements ConsoleInputInterface
      * Extract DOMAIN:ACTION parameters. If the ACTION is not present
      * "default" will be called
      *
-     * @param $firstParam
+     * @param string $firstParam
+     *
      * @return array
      */
-    protected function extractDomainAction($firstParam)
+    protected function extractDomainAction(string $firstParam)
     {
         return strpos($firstParam, ":") !== false ?
             explode(":", $firstParam) : [$firstParam, "default"];
@@ -384,6 +383,11 @@ class ConsoleInput implements ConsoleInputInterface
         $this->options = [];
         $this->params = [];
 
+        $this->shortOptionsValued=[];
+        $this->shortOptionsVoid=[];
+        $this->longOptionsValued=[];
+        $this->longOptionsVoid=[];
+
         return $this;
     }
 
@@ -393,11 +397,12 @@ class ConsoleInput implements ConsoleInputInterface
      *
      * $storeVariable["c"] = '/etc/Arun/config.cfg'
      *
-     * @param $source
-     * @param $destination
-     * @return mixed
+     * @param array $source
+     * @param array $destination
+     *
+     * @return array
      */
-    private function makeArrayFromOptionsAndValues($source, &$destination)
+    private function makeArrayFromOptionsAndValues(array $source, array &$destination): array
     {
         $destination = [];
 
@@ -415,11 +420,11 @@ class ConsoleInput implements ConsoleInputInterface
      *
      * $dest["i"] = ""
      *
-     * @param $source
-     * @param $destination
-     * @return mixed
+     * @param array $source
+     * @param array $destination
+     * @return array
      */
-    private function makeArrayFromOptionsWithVoidValues($source, &$destination)
+    private function makeArrayFromOptionsWithVoidValues(array $source, array &$destination): array
     {
         $destination = [];
 
@@ -435,7 +440,7 @@ class ConsoleInput implements ConsoleInputInterface
      *
      * @throws \Exception
      */
-    private function process(): void
+    protected function process(): void
     {
         list($commandName, $actionName) = $this->checkArguments();
 

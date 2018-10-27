@@ -16,14 +16,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
- *
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  * Arun Internal Application Container
  *
- *
- * Date: 27/09/18
- * Time: 13.20
  */
 
 use ArunCore\Interfaces\Core\HelpGeneratorInterface;
@@ -31,10 +27,9 @@ use ArunCore\Interfaces\IO\ConsoleInputInterface;
 use ArunCore\Interfaces\IO\ConsoleOutputInterface;
 use ArunCore\Interfaces\Domain\DomainActionExecutorInterface;
 use ArunCore\Interfaces\Domain\DomainActionNameGeneratorInterface;
-use ArunCore\Interfaces\Helpers\ReflectionHelpersInterface;
 use ArunCore\Interfaces\Core\ArunCoreInterface;
+use ArunCore\Interfaces\Helpers\LowLevelHelperInterface;
 use ArunCore\Interfaces\Security\SanitizerInterface;
-use App\Helpers\Conf;
 
 return [
 
@@ -44,7 +39,7 @@ return [
 
     DomainActionExecutorInterface::class => DI\autowire("ArunCore\\Core\\Domain\\DomainActionExecutor"),
 
-    ArunCore\Interfaces\Helpers\ReflectionHelpersInterface::class => DI\get("ArunCore\\Core\\Helpers\\ReflectionHelpers"),
+    LowLevelHelperInterface::class => DI\get("ArunCore\\Core\\Helpers\\LowLevelHelper"),
 
     ConsoleInputInterface::class => DI\autowire("ArunCore\\Core\\IO\\ConsoleInput")
         ->constructorParameter("args", $_SERVER["argv"]),
@@ -52,18 +47,9 @@ return [
     ConsoleOutputInterface::class => DI\autowire("ArunCore\\Core\\IO\\ConsoleOutput")
         ->constructorParameter("enableColors", getenv("COLORS")),
 
-    DomainActionNameGeneratorInterface::class => DI\autowire("ArunCore\\Core\\Domain\\DomainActionNameGenerator")
-        ->constructorParameter("whiteListName", "%s/" . \App\Helpers\Conf\get("whiteListName"))
-        ->constructorParameter("basePath", ((new SplFileInfo(__DIR__))->getRealPath()) . "/../"),
+    DomainActionNameGeneratorInterface::class => DI\autowire("ArunCore\\Core\\Domain\\DomainActionNameGenerator"),
 
-    HelpGeneratorInterface::class => DI\autowire("ArunCore\\Core\\Helpers\\HelpGenerator")
-        ->constructorParameter(
-            "helpContent",
-            include sprintf(
-                "%s%s",
-                (new SplFileInfo(__DIR__))->getRealPath() . "/../",
-                \App\Helpers\Conf\get("whiteListName")
-            )
-        ),
+    HelpGeneratorInterface::class => DI\autowire("ArunCore\\Core\\Helpers\\HelpGenerator"),
+
     Doctrine\Common\Annotations\Reader::class => DI\get("Doctrine\Common\Annotations\AnnotationReader")
 ];

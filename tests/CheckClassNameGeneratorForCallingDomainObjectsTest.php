@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  *
  * UnitTest class for checking the correct generation of the class that manages a DOMAIN required
@@ -40,7 +40,7 @@ class CheckClassNameGeneratorForCallingDomainObjectsTest extends TestCase
     public $whiteListCustom;
 
     /**
-     * Initialise fake whitelist and parameters
+     * Initialise fake parameters
      */
     public function setUp()
     {
@@ -62,19 +62,57 @@ class CheckClassNameGeneratorForCallingDomainObjectsTest extends TestCase
             "-q"
         ];
 
-        $this->whiteListCustom = [
-            "car" => [
-                "actions" => [
-                    "check" => "Check the car",
-                    "on" => "Turn on the car",
-                    "accelerate" => "Increment speed",
-                    "go" => "Let's start"
-                ],
-                "general" => [
-                    "description" => "Car checker"
-                ]
-            ]
+    }
+
+    /**
+     * @test
+     *
+     * @throws
+     */
+    public function checkIfTheGeneratedCommandIsCorrectAccordingToInput()
+    {
+        $nameGenerator = $this->getGeneratorAccordingToWhiteListAndDomainAction($this->fakeParameters);
+
+        $classAndMethodNamesForCalling = $nameGenerator->getClassAndMethodNamesForCalling();
+
+        $this->assertEquals("\\App\\Console\\Domains\\CarDomain", $classAndMethodNamesForCalling[0]);
+        $this->assertEquals("check", $classAndMethodNamesForCalling[2]);
+    }
+
+    /**
+     * @test
+     *
+     * @throws
+     */
+    public function checkIfSingleDomainWithoutActionSetActionToDefault()
+    {
+        $this->fakeParameters[1]="Camion";
+        $nameGenerator = $this->getGeneratorAccordingToWhiteListAndDomainAction($this->fakeParameters);
+
+        $classAndMethodNamesForCalling = $nameGenerator->getClassAndMethodNamesForCalling();
+
+        $this->assertEquals("\\App\\Console\\Domains\\CamionDomain", $classAndMethodNamesForCalling[0]);
+        $this->assertEquals("default", $classAndMethodNamesForCalling[2]);
+    }
+
+    /**
+     * @test
+     *
+     * @throws
+     */
+    public function callDomainActionWithoutParams()
+    {
+        $localFakeParameters = [
+            "Arun",
+            "test:actionwithnoparams"
         ];
+
+        $nameGenerator = $this->getGeneratorAccordingToWhiteListAndDomainAction($localFakeParameters);
+
+        $classAndMethodNamesForCalling = $nameGenerator->getClassAndMethodNamesForCalling();
+
+        $this->assertEquals("\\App\\Console\\Domains\\TestDomain", $classAndMethodNamesForCalling[0]);
+        $this->assertEquals("actionwithnoparams", $classAndMethodNamesForCalling[2]);
     }
 
     /**
@@ -82,39 +120,26 @@ class CheckClassNameGeneratorForCallingDomainObjectsTest extends TestCase
      *
      * @throws
      */
-    public function checkIfTheGeneratedCommandIsCorrectAccordingToInputAndWhiteList()
+    public function checkIfCommandActionAndParametersAreNotSetRedirectsToDefaultWithActionHelp()
     {
-        $nameGenerator = $this->getGeneratorAccordingToWhiteListAndDomainAction($this->fakeParameters, $this->whiteListCustom);
+        unset($this->fakeParameters[1]);
+        unset($this->fakeParameters[2]);
+        unset($this->fakeParameters[3]);
+
+        $nameGenerator = $this->getGeneratorAccordingToWhiteListAndDomainAction($this->fakeParameters);
 
         $classAndMethodNamesForCalling = $nameGenerator->getClassAndMethodNamesForCalling();
 
-        $this->assertEquals("\\App\\Console\\Domains\\CarDomain", $classAndMethodNamesForCalling[0]);
-        $this->assertEquals("check", $classAndMethodNamesForCalling[1]);
+        $this->assertEquals("\\App\\Console\\Domains\\DefaultDomain", $classAndMethodNamesForCalling[0]);
+        $this->assertEquals("help", $classAndMethodNamesForCalling[2]);
     }
 
     /**
-     * @test
-     *
-     * @throws
-     */
-    public function checkIfAWrongActionIsSetTheApplicationRedirectsToHelp()
-    {
-        $this->fakeParameters[1] = "car:wrongAction";
-        $nameGenerator = $this->getGeneratorAccordingToWhiteListAndDomainAction($this->fakeParameters, $this->whiteListCustom);
-
-        $classAndMethodNamesForCalling = $nameGenerator->getClassAndMethodNamesForCalling();
-
-        $this->assertEquals("\\App\\Console\\Domains\\CarDomain", $classAndMethodNamesForCalling[0]);
-        $this->assertEquals("help", $classAndMethodNamesForCalling[1]);
-    }
-
-    /**
-     * @param $whiteListCustom
      * @return \PHPUnit\Framework\MockObject\MockObject
      *
      * @throws
      */
-    private function getGeneratorAccordingToWhiteListAndDomainAction($parameters, $whiteListCustom): \PHPUnit\Framework\MockObject\MockObject
+    private function getGeneratorAccordingToWhiteListAndDomainAction($parameters): \PHPUnit\Framework\MockObject\MockObject
     {
         $consoleInput = $this->getMockBuilder("ArunCore\Core\IO\ConsoleInput")
             ->setConstructorArgs([$parameters])
@@ -122,12 +147,9 @@ class CheckClassNameGeneratorForCallingDomainObjectsTest extends TestCase
             ->getMock();
 
         $nameGenerator = $this->getMockBuilder("ArunCore\Core\Domain\DomainActionNameGenerator")
-            ->setConstructorArgs(["/fakeWhitListName", "/fakeBasePath", $consoleInput])
-            ->setMethods(["getWhiteList"])
+            ->setConstructorArgs([$consoleInput])
+            ->setMethods(null)
             ->getMock();
-
-        $nameGenerator->setCustomWhitelistArray($this->whiteListCustom);
-        $nameGenerator->method("getWhiteList")->willReturn($whiteListCustom);
 
         return $nameGenerator;
     }

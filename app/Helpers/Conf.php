@@ -16,9 +16,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  */
+
+namespace App\Helpers\Conf;
 
 /**
  * Get the configuration from the config.php file
@@ -26,11 +28,7 @@
  * @param $key
  * @return mixed
  *
- * TODO: I promise... on the next release the first thing is to Namespace it! ;-)
  */
-
-namespace App\Helpers\Conf;
-
 function get($key)
 {
     $env = (array)(require __DIR__ . "/../../config/config.php");

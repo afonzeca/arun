@@ -16,16 +16,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
- *
- *
- * Static configuration. Pls modify the WHITELIST_NAME from .envcli for changing whitelist reference
- *
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  * Date: 09/10/18
  * Time: 13.14
  */
 
-return [
-    "whiteListName" => "config/".getenv("WHITELIST_NAME").".php",
-];
+return [];

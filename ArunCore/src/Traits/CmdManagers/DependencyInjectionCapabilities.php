@@ -16,25 +16,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  * Date: 01/10/18
  * Time: 13.05
  */
+
 namespace ArunCore\Traits\CmdManagers;
 
 trait DependencyInjectionCapabilities
 {
     /**
-     * @Inject("\Di\Container");
+     * @Inject("\DI\Container");
      */
     protected $factory;
 
     /**
      * @param $className
      * @return mixed
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
      */
     public function make($className)
     {

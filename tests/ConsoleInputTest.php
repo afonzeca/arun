@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  *
  * UnitTest for the ConsoleInput class
@@ -263,6 +263,24 @@ class ConsoleInputTest extends TestCase
     }
 
     /**
+     * @test
+     *
+     * @throws
+     */
+    public function callDomainActionWithoutParams()
+    {
+        $fakeParameters = [
+            "Arun",
+            "test:actionwithnoparams"
+        ];
+
+        // Gets a new instance despite the setUp method
+        $cIn = $this->getConsoleInputWithParams($fakeParameters);
+        $this->assertEquals("test", $cIn->getDomainName());
+        $this->assertEquals("actionwithnoparams", $cIn->getActionName());
+    }
+
+    /**
      * @param $fakeParameters
      * @return ConsoleInputInterface
      * @throws Exception
@@ -271,6 +289,5 @@ class ConsoleInputTest extends TestCase
     {
         return new ConsoleInput($fakeParameters);
     }
-
 
 }

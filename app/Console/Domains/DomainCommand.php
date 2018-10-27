@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  *
  * Date: 15/10/18
@@ -33,8 +33,6 @@ use ArunCore\Annotations as SET;
 abstract class DomainCommand extends BaseDomainCommand
 {
     /**
-     * @SET\ActionEnabled(true)
-     * @SET\ActionSyn("This help")
      *
      * Default help when undefined
      *
@@ -52,8 +50,6 @@ abstract class DomainCommand extends BaseDomainCommand
     }
 
     /**
-     * @SET\ActionEnabled(true)
-     * @SET\ActionSyn("Help alias")
      *
      * The default Action called when Arun is called without parameters.
      * Replace with your code if need

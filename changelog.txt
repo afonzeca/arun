@@ -1,5 +1,29 @@
 List of changes:
 
+* v0.4-alpha	- Changes made:
+
+		   1) Removed static whitelists for the "help definition" and for
+		   enabling Domains
+		   2) Added Annotations class support; now help for
+		   Classes(Domains) and Methods(Action) can be set thanks to
+		   Custom Annotations
+		   3) Annotations also helps to define which domains/actions
+		   are enabled
+		   4) Help functionalities rewritten. Now no need to define
+		   anything; according to the level of annotations, the
+		   framework auto-generates detailed help!
+		   5) Now we have inside Collections (with Count ed Iterator)
+		   6) Optimization and refactoring
+		   7) Previous implemented domains could be not compatible
+		   with this version
+		   8) Added ExampleDomain class for helping the understanding
+		   of the Annotations
+		   9) Changed Domains directory, now Domains class must be
+		   under app/Console/Domains
+		   10) Conf global function has been namespaced
+		   11) Some Internals renamed
+		   12) It will be published on 2019-10-28
+
 * v0.3-alpha	- Changes made:
 
 		   1) Changed project name from Bosun to Arun.

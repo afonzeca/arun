@@ -18,24 +18,67 @@
  *
  * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
- * Date: 24/09/18
- * Time: 19.13
  */
 
 namespace ArunCore\Traits\Generics;
 
-trait OOPHelpersTrait
+trait MixedCollectionTrait
 {
 
     /**
-     * @param string $className
+     * @var array
+     */
+    private $elements;
+
+    /**
+     * @param  $theClosure
      * @return bool
+     *
      * @throws \ReflectionException
      */
-    public function implementsInterface(string $className, string $interfaceName): bool
+    private function isClosure($theClosure): bool
     {
-        $class = new \ReflectionClass($className);
-        return $class->implementsInterface($interfaceName);
+        return (new \ReflectionFunction($theClosure))->isClosure();
+    }
+
+    public function toArray()
+    {
+        return $this->elements;
+    }
+
+    public function keys(): array
+    {
+        return array_keys($this->elements);
+    }
+
+    public function count()
+    {
+        return count($this->elements);
+    }
+
+    public function isEmpty(): bool
+    {
+        return (bool)count($this->elements);
+    }
+
+    public function destroyContent()
+    {
+        $this->elements = [];
+    }
+
+    public function current()
+    {
+        return current($this->elements);
+    }
+
+    public function key()
+    {
+        return key($this->elements);
+    }
+
+    public function hasKey($key): bool
+    {
+        return array_key_exists($key, $this->elements);
     }
 
 }

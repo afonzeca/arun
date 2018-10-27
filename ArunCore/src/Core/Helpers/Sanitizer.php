@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  *
  * Class for sanitizing and re-casting command line parameters (NOT USED YET! KEEP ATTENTION TO THE PARAMETERS
@@ -72,16 +72,16 @@ class Sanitizer implements SanitizerInterface
      */
     public function isClassNameValid(string $className): bool
     {
-        return preg_match('^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$', $className);
+        return (bool)(preg_match('^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$', $className));
     }
 
     /**
      * Check correct filename
      *
-     * @param $parameter
+     * @param string $parameter
      * @return bool
      */
-    public function isFilenameValid($parameter): bool
+    public function isFilenameValid(string $parameter): bool
     {
         return !preg_match('/^(?:[a-z0-9_-]|\.(?!\.))+$/iD', $parameter);
     }

@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  *
  * Date: 11/10/18
@@ -53,10 +53,10 @@ interface SanitizerInterface
     public function isClassNameValid(string $className): bool;
 
     /**
-     * Check correct filename passed
+     * Check correct filename
      *
-     * @param $parameter
+     * @param string $parameter
      * @return bool
      */
-    public function isFilenameValid($parameter): bool;
+    public function isFilenameValid(string $parameter): bool;
 }

@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  *
  * Get the command line input and process its parameters, options, domain, action, etc.
@@ -36,7 +36,7 @@ interface ConsoleInputInterface
     public function extractShortOptionsWithParams(): array;
 
     /**
-     * @param $key
+     * @param string $key
      * @return string | null
      */
     public function getShortOptionValuedOnly($key);
@@ -49,7 +49,7 @@ interface ConsoleInputInterface
     public function extractLongOptionsWithValues(): array;
 
     /**
-     * @param $key
+     * @param string $key
      * @return string | null
      */
     public function getLongOptionValuedOnly($key);
@@ -62,19 +62,19 @@ interface ConsoleInputInterface
     public function extractLongOptionsVoid();
 
     /**
-     * @param $key
+     * @param string $key
      * @return bool
      */
     public function hasLongOptionVoid($key): bool;
 
     /**
-     * @param $key
+     * @param string $key
      * @return bool
      */
     public function hasShortOptionVoid($key): bool;
 
     /**
-     * @param $key
+     * @param string $key
      * @return bool
      */
     public function hasOption($key): bool;
@@ -119,7 +119,7 @@ interface ConsoleInputInterface
     public function getRawArgs($filtered = true): array;
 
     /**
-     * @param $key
+     * @param string $key
      * @return string | null
      */
     public function getOption($key);

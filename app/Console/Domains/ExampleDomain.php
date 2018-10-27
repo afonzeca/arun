@@ -18,56 +18,51 @@
  *
  * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
+ * Code Example made using the Arun CLI Micro-framework for PHP7.2+
  *
- * This is the default class called when Arun in started without parameters
- *
- * Date: 18/10/18
- * Time: 17.40
  */
 
 namespace App\Console\Domains;
 
 use ArunCore\Annotations as SET;
-use ArunCore\Core\Domain\DomainActionNameGenerator;
 
 /**
- * Class DefaultDomain
+ * Class ExampleDomain
  *
+ * @SET\DomainSyn("Domain example created using Arun Framework")
  * @SET\DomainEnabled(true)
- * @SET\DomainSyn("Arun without parameters displays general help")
  *
- * @package App\Console\Domains
  */
-class DefaultDomain extends DomainCommand
+class ExampleDomain extends DomainCommand
 {
     /**
-     * @SET\ActionEnabled(true)
-     * @SET\ActionSyn("Generic help for the whole application")
      *
-     * @throws \ReflectionException
+     * @SET\ActionEnabled(true)
+     * @SET\ActionSyn("This method says hello to a specified name")
+     * @SET\ActionOption("--say-hello-to-friend=<name>:It also says hello to a friend of yours")
+     *
+     * @param string $name
+     * @param string $yourPlanet
+     *
+     * @throws
      */
-    public function help()
+    public function hello($name, $yourPlanet = "Earth")
     {
-        $className = (new \ReflectionClass($this))->getName();
+        $this->cOut->writeln("\r\nHi, #RED#$name#DEF#! Do you came from planet $yourPlanet?");
+        if ($this->hasOption("say-hello-to-friend")) {
 
-        $this->helpGen->makeHelpMessage(
-            $className,
-            DomainActionNameGenerator::extractDomainNameFromClassName($className)
-            , true
-        );
+            $friendName = $this->getOptionValue("say-hello-to-friend");
+            $this->cOut->writeln("\r\nI'm pleased to say hello to your friend #LGRAY#$friendName#DEF#\r\n");
+
+        }
     }
 
     /**
      * @SET\ActionEnabled(true)
-     * @SET\ActionSyn("Default Arun Action")
-     *
-     * The default Action called when Arun is called without parameters.
-     * Replace with your code if need
-     *
-     * @throws \ReflectionException
+     * @SET\ActionSyn("This method says bye")
      */
-    public function default()
+    public function bye()
     {
-        $this->help();
+        $this->cOut->writeln("Bye");
     }
 }

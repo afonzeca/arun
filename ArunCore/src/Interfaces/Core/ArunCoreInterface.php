@@ -16,12 +16,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  *
  * Date: 12/10/18
  * Time: 9.56
  */
+
 namespace ArunCore\Interfaces\Core;
 
 interface ArunCoreInterface

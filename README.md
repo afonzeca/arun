@@ -1,9 +1,9 @@
-## "Arun" (CLI Microframework) for PHP7.2+ - Version 0.3-alpha - (C) 2018 by Angelo Fonzeca
+## "Arun" (CLI Microframework) for PHP7.2+ - Version 0.4-alpha - (C) 2018 by Angelo Fonzeca
 
 ### What is Arun?
 
 Arun is a microframework for easily developing "console applications" written in PHP OOP. It is quite different from other similar
-frameworks/libraries (Like Symfony Console component, Silly, etc.) because Arun uses "Convention Over Configuration" for
+frameworks/libraries (Like Symfony Console component, Silly, etc.) because Arun uses "Convention Over Configuration" and Annotations for
 managing commands and associated code (your console application). 
 
 The Arun Microframework has an "out-of-the-box" native support for Dependency Injection by using Containers and Autowire 
@@ -13,12 +13,15 @@ _DISCLAIMER: This product is a prototype at early stage of development and could
 
 ### It is magic! 
 
-You create a class in a specific directory (e.g. "app/Managers/Cmd/CommandNameDomain.php") which extends a specific
-"DomainCommand" class, then you define your methods with your code inside, type hinting every parameter (recommended), set a default value for optional parameters... and you have a new command that you can call from CLI as follow:
+You create a class in a specific directory (e.g. "app/Console/Domains/CommandNameDomain.php") which extends a specific
+"DomainCommand" class, then you define your methods with your code inside, type hinting every parameter (recommended), 
+set a default value for optional parameters... and you have a new command that you can call from CLI as follow:
 
 ```bash
-./arun YOURCLASSNAME:YOURMETHOD param1 param2 \[param3\] \[param4=withdefaultvalue\]
+./arun YOURCLASSNAME:YOURMETHOD param1 param2 [param3] [param4=withdefaultvalue]
 ```
+
+(see the Examples paragraph for better understanding how it works...)
 
 You can also use options (-i --u=username --password=something --check ).
 
@@ -32,15 +35,17 @@ The parameters are also "casted" according to the specified type during the meth
 
 Another magic inside Arun is that you have a Dependency Container support (Php-Di) so you can easily inject Services inside your classes.
 
-The last but not the least, Arun can generate an help file "Automatically" for each DOMAIN. You can also add additional information
-thanks to a simple array that can be configured with optional parameters (in the next release it will be included the "Doctrine Annotation"
-support so the use of the descriptions inside the array will be deprecated).
+The last but not the least, Arun can generate an help file "Automatically" for each DOMAIN and its ACTIONS. You can also add additional information (help text)
+thanks to "annotations" (special comments inside classes). 
 
+By using annotations it is also possible to define options and their help description. 
+
+The whiteList array is not supported anymore.
 
 ### Why Arun was born?
 
-Arun was born as tool for creating a full working framework called "Sensuikan" on which I'm working on. Anyway during development I realized
-that Arun could be used as component a-part from the main project. So I made the "Arun Microframework Package".
+Arun was born as tool for creating a full working framework called "Sensuikan" on which I'm working on. Anyway during the development I realized
+that Arun could be used as a stand-alone component. So I made the "Arun Microframework Package".
 
 It can be useful when:
 
@@ -54,7 +59,7 @@ parameters, value mapping, etc.
 
 4) You want to write workers or services in PHP that can be called from your cron, command line scripts, etc.
 
-Anyway... Too much words... Now Let's some code... ;-)
+Anyway... Too much words... Now Let's making some code... ;-)
 
 ### How to install
 
@@ -66,13 +71,11 @@ Git clone the repository
 git clone https://github.com/afonzeca/arun.git
 ```
 
-and run 
+inside the created "arun" folder run 
 
 ```bash
 composer install 
 ```
-
-inside the created "arun" folder!
 
 In the next releases I will split the Arun core from the framework "boilerplate" and I will publish
 everything on Packagist.org so Composer can be used for creating Arun Projects!
@@ -92,97 +95,41 @@ We want to implement the following command:
 so you need to do the following actions:
 
 _Step 1_
-1) Edit the config/whiteList.php for adding your Domain and its Actions to the whiteList.
 
-You will find something like this:
-
-```php
-return [
-    "default" => [
-           "general" => [
-               "description" => "A Convention Over Configuration CLI Micro-Framework"
-           ],
-           "actions" => [
-               "help" => [],
-           ],
-       ], 
-];
-```
-To add your domain (class containing a set of command), copy and past default entry and modify as this:
-
-
-```php
-<?php
-
-return [
-   "default" => [
-              "general" => [
-                  "description" => "A Convention Over Configuration CLI Micro-Framework"
-              ],
-              "actions" => [
-                  "help" => [],
-              ],
-          ], 
-    "table" => [
-           "general" => [
-                  "description" => "Set of commands for manipulating DB Tables"
-           ],
-           "actions" => [
-               "create" => ["This command allows models creation","[--add-key] [--i] [--primary-key='']"],
-               // add other entries here...
-           ],
-       ],  
-];
-```
-
-Now the DOMAIN "table" is enabled and can be called within its actions like "create" (drop, etc... if you add it in the file above).
-
-At this stage of development you need the create the structure above, but it is not mandatory to set action descriptions (used for help only).
-
-If you like simply things... you can use:
-
-```php
-....
-
-    "table" => [
-           "general" => [
-               "description" => "A Convention Over Configuration CLI Micro-Framework"
-           ],
-           "actions" => [
-               "create" => [],
-               // add other entries here...
-           ],
-       ],  
-....
-```
-
-NOTE: In the next releases the whitelist will be deprecated in favor of more robust Doctrine Annotations.
-
-
-_Step 2_
-
-Inside the folder app/Managers/Cmd you need to add a class called TableDomain.php, with namespace App\Console\Domains 
-, and that extends the DomainCommand base class:
+Inside the folder app/Console/Domains you need to add a class called TableDomain.php, with namespace App\Console\Domains 
+ that extends the DomainCommand base class like the following example:
 
 ```php
 <?php
 
 namespace App\Console\Domains;
 
+use ArunCore\Annotations as SET;
+
+/**
+ * Class TableDomain
+ * 
+ * @SET\DomainEnabled(true)
+ * @SET\DomainSyn("This Domain allows to interact with tables")
+ *
+ * @package App\Console\Domains
+*/
 class TableDomain extends DomainCommand
 {
-
+    /**
+     *
+     * @SET\ActionEnabled(true)
+     * @SET\ActionSyn("This action allows to create a table with a specified name")
+     * @SET\ActionOption("--set-key=<name>:Set the primary key name")
+     * @SET\ActionOption("--use-camelCaseForNaming:Use camelCase for defining table name")
+     *
+     * @param string $tableName
+     *
+     * @throws \Exception
+    */
     public function create(string $tableName)
     {
         printf("Creating table %s\r\n", $tableName);
-    }
-
-    /**
-     * @throws \ReflectionException
-     */
-    public function help()
-    {
-        $this->helpGen->makeHelpMessage("table", self::class);
     }
 }
 ```
@@ -190,16 +137,13 @@ class TableDomain extends DomainCommand
 In other words... 
 
 1) You need to create a class called "DOMAINNAME"Domain as convention and you must extend DomainCommand (abstract class)
-2) You need to create methods corresponding to every ACTION defined in the white list for specific DOMAIN(Classname + Domain suffix).
+2) You need to create methods corresponding to every ACTION for a specific DOMAIN(Classname + Domain suffix).
 3) The action parameters from CLI will be injected in the same order inside the method parameters.
 
-The parameters values from CLI will be also "casted" according to the type hinting of the method parameters you define! 
-(it is not mandatory to type hint every parameter... but suggested to reduce security problems).   
-
-Optionally you can define the showHelp method that will show a "global" help for the domain by inspecting the class,
-its methods and parameters.
-
-The help method will be automatically called if parameters for the method are wrong.
+The parameters values from CLI will be also "casted" according to the type hinting of the method parameters you define 
+(please use only int, string, float... Array and Objects are not tested! I don't know what happens! :D)
+ 
+Note: it is not mandatory to type hint every parameter... but suggested to reduce security problems.   
 
 Now you can call your new command with
 
@@ -210,9 +154,67 @@ Now you can call your new command with
 Arun will to the job for you...
 
 
+### How annotation works? ###
+
+As you can see in the example above, there are @SET\SomeThing inside the comments... they are called "annotations")
+(they are also used in PhpDoc if you are familiar with it).
+
+They are directives, that allows Arun to get more information about the class and methods that will be used to define 
+some behaviors at run-time.  
+
+When you use Arun some annotations are MANDATORY (Just 2):
+
+```
+@SET\DomainEnabled(param) 
+```
+
+where param is "true" of "false"
+
+This allows to enable the class to be called as a "DOMAIN" from command line with Arun if set to true. It also enable
+the framework to show the command during help.
+ 
+NOTE: this annotation/directive is valid only on the top of a class otherwise you'll receive an exception!
+
+```
+@SET\ActionEnabled(param)
+```
+
+where param is "true" of "false"
+
+This allows to enable the method to be called from command line whith Arun as "ACTION". The behavior is similar to the previous
+annotation.
+
+NOTE: this annotation/directive is valid only on the top of a method otherwise you'll receive an exception!
+
+There will be only one DomainEnabled for the Class, and multiple ActionEnabled for each method that must be considered an "Action" (callable from CLI)
+
+
+Other annotations are not mandatory:
+
+```
+@SET\DomainSyn("some spaced text...")
+```
+
+```
+@SET\ActionSyn("some spaced text...")
+```
+
+define the description when help is required for a Domain or Action.
+
+The last annotation is
+
+```
+@SET\ActionOption("--optionName=<something>:description")
+```
+
+it allows you to define the options for every Action (NOTE: the Options at the moment are visible to all Actions of a Domain),
+this directive is used only for help messages at the moment.
+An ActionOption directive can be present multiple time for an Action (Method) so you can define multiple Options.
+
+
 **Example 2 - Optional Parameters**
 
-It easy to set optional parameters... Type hint your method parameter and set a default value... for example:
+It is easy to set optional parameters... Type hint your method parameter and set a default value... for example:
 
 
 ```php
@@ -237,7 +239,7 @@ Now you can call Arun with one, two, or three parameters...
 If you type ./arun table:create without parameters you will receive an automatic help... like this:
 
 ```
-Arun Microframework 0.3-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
+Arun Microframework 0.4-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
 
 Table: Table creation
 
@@ -248,15 +250,16 @@ Usage:
 Where ACTIONs are:
 
 create
-  Description: This command allows models creation
-  Parameters : [--add-key] [--i] [--primary-key=''] <tableName> [primaryKey=id] [defaultDb=mydb] 
-
+  Description: This action allows to create a table with a specified name
+  Parameters : <tableName> [primaryKey=id] [defaultDb=mydb] 
+  Option     : --set-key=<name> ( Set the primary key )
+  Option     : --use-camelCaseForNaming ( Use camelCase for defining table name )
 ```
 
 if you type ./arun without commands, actions, etc. you will receive a "global help" like this:
 
 ```
-Arun Microframework 0.3-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
+Arun Microframework 0.4-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
 
 Default: A Convention Over Configuration CLI Micro-Framework
 
@@ -383,6 +386,16 @@ Now in your TableDomain.php replace the content with the following code:
 
 namespace App\Console\Domains;
 
+use ArunCore\Annotations as SET;
+
+/**
+ * Class TableDomain
+ * 
+ * @SET\DomainEnabled(true)
+ * @SET\DomainSyn("This Domain allows to interact with tables")
+ *
+ * @package App\Console\Domains
+*/
 class TableDomain extends DomainCommand
 {
 
@@ -397,6 +410,19 @@ class TableDomain extends DomainCommand
         $this->logger = $logger;
     }
 
+    /**
+     *
+     * @SET\ActionEnabled(true)
+     * @SET\ActionSyn("This method says hello to a specified name")
+     * @SET\ActionOption("--set-key=<name>:Set the primary key name")
+     * @SET\ActionOption("--use-camelCaseForNaming:Use camelCase for defining table name")
+     * @SET\ActionOption("--u=<value>:Set username to be used for the RDBMS")
+     * @SET\ActionOption("--l=<value>:Logs something")
+     *
+     * @param string $tableName
+     *
+     * @throws \Exception
+    */
     public function create(string $tableName, string $primaryKey = "id", string $defaultDb = "mydb")
     {
 
@@ -419,21 +445,13 @@ class TableDomain extends DomainCommand
             $this->logger->error($this->getOptionValue("l"));
         }
     }
-
-    /**
-     * @throws \ReflectionException
-     */
-    public function help()
-    {
-        $this->helpGen->makeHelpMessage("table", self::class);
-    }
 }
 ```
 
 In other word, the LoggerInterface (the right way!) is required inside the constructor and it will injected by Arun via
  di-container when the application starts! 
 
-Thanks to the constructor, the logger object is stored inside the $logger properties so it accessible from other methods. 
+Thanks to the constructor, the logger object is stored inside the $logger propertie so it accessible from other methods. 
 
 ```php
 protected $logger;
@@ -471,9 +489,14 @@ For further information regarding the use of Dependency Injection inside Arun pl
 by Matthieu Napoli and contributors.
 
 
+**Example 5 **
+
+Inside the Arun package there is a file called "ExampleDomain.php" (under app/Console/Domains) that can be used as base for
+your Domain development. It also shows undocumented features.
+
 ### Configuration File Support
 
-For statical configuration, Arun uses the config/config.php file accessible via the global function "conf()".
+For statical configuration, Arun uses the config/config.php file accessible via the global function "Conf()".
 
 Anyway it supports "out-of-the-box" the ".env" files, thank to the library from PhpDotEnv by VLucas (https://github.com/vlucas/phpdotenv)
 
@@ -492,16 +515,19 @@ Arun has many undocumented functions, internals and other useful things... ASAP 
 When you call Arun, it does the following (It's not Black Magic :D)
 
 1) Configures and get di DI Container, starts the "ConsoleInput" and processes the parameters  
-2) Check the white list to verify that the DOMAIN:ACTION received from CLI can be called
-3) Inject some dependencies from container 
-4) Make some security checks on parameters (e.g. strips some characters and other checks) - CODE WRITTEN BUT NOT SUPPORTED YET
-5) By using reflection analyzes the structure of the ACTION requests (e.g. type hinting of parameters and number of them)
-6) Gets the class corresponding to DOMAIN (in our case "table"), uses a factory to instantiate it and the call method "ACTION" (e.g. "create")
-7) Inside the method ACTION Arun injects the parameters passed (and if required also dependencies from container)
-8) The method called "ACTION" is called...
-9) If something wrong a contextual help will be displayed (by using reflection it will describe the DOMAIN and ACTIONS according to the parameters passed)
+2) Inject some dependencies from container 
+3) Make some security checks on parameters (e.g. strips some characters and other checks) - CODE WRITTEN BUT NOT SUPPORTED YET
+4) By using reflection analyzes the structure of the ACTION requests (e.g. type hinting of parameters and number of them)
+5) Check if the annotations define a Class or Method as "Enabled" (otherwise Help will be showed and the program ends).
+6) If check passed, the framework gets the class corresponding to DOMAIN (in our case "table"), it uses a factory to instantiate the class 
+8) Inside the method ACTION (e.g. create) Arun injects the parameters passed (and if required also dependencies from container to the constructor)
+9) The method "ACTION" (e.g. create) is called...
+10) If something goes wrong a contextual help will be displayed (by using reflection the framework will describe the DOMAIN and ACTIONS according to the 
+   parameters passed and annotations)
 
-Arun is written using S.O.L.I.D. principles, some 12factors principles and full OOP approach! Feel free to browse the code, it's full documented!
+Arun is written respecting S.O.L.I.D. principles (ehm... I try to respect them at my best ;-) ), some 12factors principles and full OOP approach! 
+
+Feel free to browse the code, it's full documented!
 
 _Note for developers_
 
@@ -514,13 +540,13 @@ I also made some UT, you will find it in the tests directory so you can understa
 
 The next release will hopefully includes:
 
-1) Support for Doctrine Annotations for describing ACTIONS and WhiteList (the whiteList array will be deprecated)
-2) Support for full color, tables and fancy things for outputting information
-3) Security improvements
-4) Some code refactoring
-5) Support for creating Arun Classes (DOMAINs) with internal DOMAIN/ACTIONS... You don't need to copy and paste anymore from this docs!
-6) More complete and full Unit Tests
+1) Support for full color, tables and fancy things for outputting information
+2) Security improvements
+3) Support for creating Arun Classes (DOMAINs) with internal DOMAIN/ACTIONS... You don't need to copy and paste anymore from this docs!
+4) More complete and full Unit Tests
+5) Mandatory or "optional" options
 
+See the "changelog.txt" file inside the package for checking the changes compared to the previous version.
 
 ### License Info
 
@@ -555,7 +581,7 @@ Sir Clive Sinclair, Tony Tebby, Adriano Olivetti, Brian Kernighan and Dennis Rit
 
 Project link: https://github.com/afonzeca/arun
 
-(Previous project link: https://github.com/afonzeca/bosun )
+( Previous project link: https://github.com/afonzeca/bosun )
 
 See changelog.txt inside the package for details about framework improvements.
 

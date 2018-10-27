@@ -16,9 +16,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  * Generates the help screen
  *
@@ -28,8 +28,10 @@
 
 namespace ArunCore\Core\Helpers;
 
+
+use ArunCore\Core\Domain\DomainActionNameGenerator;
 use ArunCore\Interfaces\Core\HelpGeneratorInterface;
-use ArunCore\Interfaces\Helpers\ReflectionHelpersInterface;
+use ArunCore\Interfaces\Helpers\LowLevelHelperInterface;
 use ArunCore\Interfaces\IO\ConsoleOutputInterface;
 
 class HelpGenerator implements HelpGeneratorInterface
@@ -40,30 +42,22 @@ class HelpGenerator implements HelpGeneratorInterface
     private $cOut;
 
     /**
-     * @var array
+     * @var LowLevelHelperInterface
      */
-    private $helpContent;
-
-    /**
-     * @var ReflectionHelpersInterface
-     */
-    private $rflHelper;
+    private $lHelper;
 
     /**
      * HelpGenerator constructor.
      *
-     * @param array $helpContent
-     * @param ReflectionHelpersInterface $reflection
+     * @param LowLevelHelperInterface $lHelper
      * @param ConsoleOutputInterface $cOut
      */
     public function __construct(
-        array $helpContent,
-        ReflectionHelpersInterface $reflection,
+        LowLevelHelperInterface $lHelper,
         ConsoleOutputInterface $cOut
     )
     {
-        $this->helpContent = $helpContent;
-        $this->rflHelper = $reflection;
+        $this->lHelper = $lHelper;
         $this->cOut = $cOut;
     }
 
@@ -78,20 +72,18 @@ class HelpGenerator implements HelpGeneratorInterface
      */
     public function makeHelpMessage(string $className, string $domain, bool $global = false): void
     {
-        $domainSynop = $this->rflHelper->getDomainSynopsis($className, $domain);
-
-
+        $domainSynop = $this->lHelper->getDomainSynopsis($className);
 
         $this->helpMessageHeader($domain, $domainSynop);
 
         if (!$global) {
-            $methodsList = $this->rflHelper->getClassPublicMethods($className, $domain);
-            $actions = $this->rflHelper->getEnabledActionsAnnotations($methodsList);
+            $methodsList = $this->lHelper->getClassPublicMethods($className, $domain);
+            $actions = $this->lHelper->getEnabledActionsAnnotations($methodsList);
             $this->helpMessageBody($domain, $actions);
             return;
         }
 
-        $this->helpMessageGlobalBody($this->helpContent);
+        $this->helpMessageGlobalBody($this->lHelper->getSynopsisFromDomains());
     }
 
     /**
@@ -131,10 +123,11 @@ class HelpGenerator implements HelpGeneratorInterface
     }
 
     /**
-     * @param $domain
-     * @param $help
+     * @param string $domain
+     * @param string $helpMessage
+     *
      */
-    private function helpMessageHeader($domain, $helpMessage): void
+    private function helpMessageHeader(string $domain, string $helpMessage): void
     {
         $this->cOut->blank();
         $this->cOut->writeln("#RED#Arun Microframework " . getenv("APP_VERSION") . "#DEF# - (C) 2018 by Angelo Fonzeca (Apache License 2.0)");
@@ -153,7 +146,7 @@ class HelpGenerator implements HelpGeneratorInterface
      */
     private function helpMessageBody(string $domain, array $actions): void
     {
-        $classInstance = $this->rflHelper->makeDomainFQDN($domain);
+        $classInstance = DomainActionNameGenerator::getFQDNClass($domain);
 
         $this->cOut->writeln("Usage: ");
         $this->cOut->blank();
@@ -210,9 +203,14 @@ class HelpGenerator implements HelpGeneratorInterface
 
         foreach ($help as $name => $item) {
 
+            if ($name == "default") {
+                $name = "'no parameters'";
+            }
+
             $this->cOut->write("  #BLUE#" . $name . "#DEF#");
-            if (isset($item["general"])) {
-                $this->cOut->write(": " . $item["general"]["description"] . "\r\n");
+
+            if ($item != "") {
+                $this->cOut->write(": " . $item . "\r\n");
             }
             $this->cOut->blank();
         }

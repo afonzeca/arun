@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  *
  * Date: 17/10/18
@@ -25,65 +25,71 @@
 
 namespace ArunCore\Interfaces\Helpers;
 
-use Doctrine\Common\Annotations\Reader;
-
-interface ReflectionHelpersInterface
+interface LowLevelHelperInterface
 {
+
     /**
      * Check if the number of parameters from command line
      * is the same required from DOMAIN:ACTION class
+     *
      * @param string $className
+     * @param string $domain
      * @param string $action
+     *
      * @return mixed
+     *
      * @throws \ReflectionException
      */
-    public function numberOfMandatoryParameters(string $className, string $action);
+    public function numberOfMandatoryParameters(string $className, string $domain, string $action);
 
     /**
      * Recast all command line parameters to the class parameters that
      * corresponds to DOMAIN:ACTION required from CLI
+     *
      * @param string $className
+     * @param string $domain
      * @param string $action
      * @param array $realParameters
      *
      * @return array
+     *
      * @throws \ReflectionException
      * @throws \Exception
      */
-    public function getReCastedParameters(string $className, string $action, array $realParameters): array;
+    public function getReCastedParameters(string $className, string $domain, string $action, array $realParameters): array;
 
     /**
-     * @param $antReader
-     * @param $methodsList
-     * @return mixed
+     * @param array $methodsList
+     *
+     * @return array
      */
-    public function getEnabledActionsAnnotations($methodsList);
+    public function getEnabledActionsAnnotations(array $methodsList): array;
 
     /**
      * @param string $className
-     * @param string $domain
      *
      * @return string
      *
      * @throws \ReflectionException
      */
-    public function getDomainSynopsis(string $className, string $domain): string;
+    public function getDomainSynopsis(string $className): string;
 
     /**
      * @param string $domain
      * @return bool
      *
+     * @throws \Exception
      */
     public function isDomainEnabled(string $domain): bool;
 
     /**
-     * @param $domain
-     * @param $action
+     * @param string $domain
+     * @param string $action
      *
      * @return bool
      * @throws \ReflectionException
      */
-    public function isActionEnabled($domain, $action);
+    public function isActionEnabled(string $domain, string $action);
 
     /**
      * @param string $className
@@ -96,7 +102,8 @@ interface ReflectionHelpersInterface
     public function getClassPublicMethods(string $className, string $domain);
 
     /**
-     * @param $domain
+     * @param string $domain
+     *
      * @return \ReflectionClass
      *
      * @throws \ReflectionException
@@ -104,8 +111,30 @@ interface ReflectionHelpersInterface
     public function getReflectionClassFromDomain(string $domain);
 
     /**
-     * @param $domain
-     * @return string
+     * @param string $className
+     * @param string $domain
+     * @param string $action
+     *
+     * @return bool
+     * @throws \ReflectionException
+     *
      */
-    public function makeDomainFQDN(string $domain): string;
+    public function isActionPresent(string $className, string $domain, string $action);
+
+    /**
+     * Return the file list of all domains class
+     *
+     * @throws \Exception
+     *
+     * TODO: It must improved and fixed ASAP
+     */
+    function getClassListAssociatedToDomains();
+
+    /**
+     * return array $synopsis
+     *
+     * @throws \ReflectionException
+     */
+    function getSynopsisFromDomains(): array;
+
 }

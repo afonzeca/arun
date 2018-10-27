@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  *
  * This class executes the DOMAIN:ACTION required
@@ -30,7 +30,7 @@ namespace ArunCore\Core\Domain;
 
 use ArunCore\Interfaces\IO\ConsoleInputInterface;
 use ArunCore\Interfaces\Domain\DomainActionExecutorInterface;
-use ArunCore\Interfaces\Helpers\ReflectionHelpersInterface;
+use ArunCore\Interfaces\Helpers\LowLevelHelperInterface;
 
 class DomainActionExecutor implements DomainActionExecutorInterface
 {
@@ -44,16 +44,16 @@ class DomainActionExecutor implements DomainActionExecutorInterface
     /**
      * Factory for non-static classes
      *
-     * @var \Di\FactoryInterface
+     * @var \DI\FactoryInterface
      */
     private $container;
 
     /**
      * An Helper class for analyzing a class that represents a Domain
      *
-     * @var ReflectionHelpersInterface $reflection
+     * @var LowLevelHelperInterface $lHelper
      */
-    private $reflection;
+    private $lHelper;
 
     /**
      * DomainAction constructor.
@@ -64,18 +64,18 @@ class DomainActionExecutor implements DomainActionExecutorInterface
      *
      * This class is a stateless service, so no setters are present.
      *
-     * @param \Di\FactoryInterface
-     * @param ReflectionHelpersInterface $reflection
+     * @param \DI\FactoryInterface $container
+     * @param LowLevelHelperInterface $lHelper
      * @param ConsoleInputInterface $ConsoleInput
      */
     public function __construct(
-        \Di\FactoryInterface $container,
-        ReflectionHelpersInterface $reflection,
+        \DI\FactoryInterface $container,
+        LowLevelHelperInterface $lHelper,
         ConsoleInputInterface $ConsoleInput
     )
     {
         $this->container = $container;
-        $this->reflection = $reflection;
+        $this->lHelper = $lHelper;
         $this->cInput = $ConsoleInput;
     }
 
@@ -101,43 +101,50 @@ class DomainActionExecutor implements DomainActionExecutorInterface
         string $className,
         string $domain,
         string $action
-    ): bool
-    {
-        if (class_exists($className)) {
+    ): bool {
+        if (
+            class_exists($className) &&
+            $this->lHelper->isDomainEnabled($domain)
+        ) {
+            $numOfMandatoryParams = $this->lHelper->numberOfMandatoryParameters($className, $domain, $action);
+            $realParameters = $this->cInput->getParams();
 
-            if ($this->reflection->isDomainEnabled($domain)) {
-                $numOfMandatoryParams = $this->reflection->numberOfMandatoryParameters($className, $action);
-                $realParameters = $this->cInput->getParams();
+            $numOfMandatoryParams !== null && ($numOfMandatoryParams <= count($this->cInput->getParams()))
+                ?: $action = "help";
 
-                $numOfMandatoryParams <= count($this->cInput->getParams()) ?: $action = "help";
+            $this->makeObjectAndRunMethod($className, $domain, $action, $realParameters);
 
-                $this->makeObjectAndRunMethod($className, $action, $realParameters);
-
-                return true;
-            }
+            return true;
         }
 
-        $this->makeObjectAndRunMethod("App\Console\Domains\DefaultDomain", "help", []);
+        $this->makeObjectAndRunMethod("App\Console\Domains\DefaultDomain", $domain, "help", []);
 
         return false;
     }
 
     /**
-     * @param $className
-     * @param $action
-     * @param $realParameters
+     * @param string $className
+     * @param string $domain
+     * @param string $action
+     * @param array $realParameters
+     *
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      * @throws \ReflectionException
      */
-    private function makeObjectAndRunMethod($className, $action, $realParameters): void
+    private function makeObjectAndRunMethod(
+        string $className,
+        string $domain,
+        string $action,
+        array $realParameters
+    ): void
     {
-        if (!$this->reflection->isActionEnabled($className, $action)) {
+        if (!$this->lHelper->isActionEnabled($className, $action)) {
             $action = "help";
         }
 
         $this->container->make($className)
             ->{$action}
-            (...($this->reflection->getReCastedParameters($className, $action, $realParameters)));
+            (...($this->lHelper->getReCastedParameters($className, $domain, $action, $realParameters)));
     }
 }

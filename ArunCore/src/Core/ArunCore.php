@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  * Class ArunCore allows to kickstart the application
  * by executing the DOMAIN:ACTION requested from CLI
@@ -45,7 +45,7 @@ class ArunCore implements ArunCoreInterface
     /**
      * Contains the instance of an "Executor" Class which adheres to DomainActionExecutor
      *
-     * @var \ArunCore\Core\DomainActionExecutor $executor;
+     * @var \ArunCore\Interfaces\Domain\DomainActionExecutorInterface $executor;
      */
     private $executor;
 

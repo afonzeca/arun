@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  *
  * This class contains low level methods for analyzing classes and objects via PHP Reflection
@@ -27,11 +27,12 @@
 
 namespace ArunCore\Core\Helpers;
 
-use \ArunCore\Interfaces\Helpers\ReflectionHelpersInterface;
+use ArunCore\Core\Domain\DomainActionNameGenerator;
+use ArunCore\Interfaces\Helpers\LowLevelHelperInterface;
+use ArunCore\Core\Collections\FlatListCollection;
 use Doctrine\Common\Annotations\Reader;
-use Doctrine\Common\Annotations\AnnotationReader;
 
-class ReflectionHelpers implements ReflectionHelpersInterface
+class LowLevelHelper implements LowLevelHelperInterface
 {
 
     /**
@@ -54,19 +55,24 @@ class ReflectionHelpers implements ReflectionHelpersInterface
      * is the same required from DOMAIN:ACTION class
      *
      * @param string $className
+     * @param string $domain
      * @param string $action
      *
      * @return mixed
      *
      * @throws \ReflectionException
      */
-    public function numberOfMandatoryParameters(string $className, string $action)
+    public function numberOfMandatoryParameters(string $className, string $domain, string $action)
     {
-        $reflection = new \ReflectionMethod($className, $action);
+        if ($this->isActionPresent($className, $domain, $action)) {
+            $reflection = new \ReflectionMethod($className, $action);
 
-        $numberOfRequiredParameters = $reflection->getNumberOfRequiredParameters();
+            $numberOfRequiredParameters = $reflection->getNumberOfRequiredParameters();
 
-        return $numberOfRequiredParameters;
+            return $numberOfRequiredParameters;
+        }
+
+        return null;
     }
 
     /**
@@ -74,6 +80,7 @@ class ReflectionHelpers implements ReflectionHelpersInterface
      * corresponds to DOMAIN:ACTION required from CLI
      *
      * @param string $className
+     * @param string $domain
      * @param string $action
      * @param array $realParameters
      *
@@ -82,9 +89,9 @@ class ReflectionHelpers implements ReflectionHelpersInterface
      * @throws \ReflectionException
      * @throws \Exception
      */
-    public function getReCastedParameters(string $className, string $action, array $realParameters): array
+    public function getReCastedParameters(string $className, string $domain, string $action, array $realParameters): array
     {
-        $numOfMandatoryParams = $this->numberOfMandatoryParameters($className, $action);
+        $numOfMandatoryParams = $this->numberOfMandatoryParameters($className, $domain, $action);
 
         if ($numOfMandatoryParams !== FALSE) {
             $reflection = new \ReflectionMethod(
@@ -104,9 +111,8 @@ class ReflectionHelpers implements ReflectionHelpersInterface
      * Recast every parameters according to the Class definition
      *
      * @param \ReflectionParameter[] $methodParamsList
-     * @param $commandLineParameters
-     * @param $mandatoryParams
-     * @return mixed
+     * @param array $commandLineParameters
+     * @return array
      *
      * TODO: Must be optimized!
      */
@@ -138,12 +144,12 @@ class ReflectionHelpers implements ReflectionHelpersInterface
     }
 
     /**
-     * @param $domain
-     * @param $action
+     * @param string $domainFQDN
+     * @param string $action
      * @return bool
      * @throws \ReflectionException
      */
-    public function isActionEnabled($domainFQDN, $action)
+    public function isActionEnabled(string $domainFQDN, string $action)
     {
         $rClass = $this->getReflectionClassFromFQDN($domainFQDN);
         $rMethod = $rClass->getMethod($action);
@@ -158,12 +164,10 @@ class ReflectionHelpers implements ReflectionHelpersInterface
     }
 
     /**
-     * @param $antReader
-     * @param $method
-     * @param $actions
-     * @return mixed
+     * @param array $methodsList
+     * @return array
      */
-    public function getEnabledActionsAnnotations($methodsList)
+    public function getEnabledActionsAnnotations(array $methodsList): array
     {
         $antReader = $this->aReader;
 
@@ -198,13 +202,12 @@ class ReflectionHelpers implements ReflectionHelpersInterface
 
     /**
      * @param string $className
-     * @param string $domain
      *
      * @return string
      *
      * @throws \ReflectionException
      */
-    public function getDomainSynopsis(string $className, string $domain): string
+    public function getDomainSynopsis(string $className): string
     {
         $rClass = $this->getReflectionClassFromFQDN($className);
 
@@ -220,7 +223,7 @@ class ReflectionHelpers implements ReflectionHelpersInterface
      * @param string $domain
      * @return bool
      *
-     * @throws
+     * @throws \Exception
      */
     public function isDomainEnabled(string $domain): bool
     {
@@ -229,6 +232,31 @@ class ReflectionHelpers implements ReflectionHelpersInterface
         $domainStatus = $this->aReader->getClassAnnotation($rClass, "\ArunCore\Annotations\DomainEnabled");
         if ($domainStatus != null) {
             return $domainStatus->enabled;
+        }
+
+        return false;
+    }
+
+
+    /**
+     * @param string $className
+     * @param string $domain
+     * @param string $action
+     *
+     * @return bool
+     * @throws \ReflectionException
+     *
+     * TODO: MUST BE REWRITTEN/OPTIMIZED - LAST MINUTE CODE ;-)
+     */
+    public function isActionPresent(string $className, string $domain, string $action)
+    {
+
+        $methodsList = $this->getClassPublicMethods($className, $domain);
+
+        foreach ($methodsList as $method) {
+            if ($method->name == $action) {
+                return true;
+            }
         }
 
         return false;
@@ -250,18 +278,22 @@ class ReflectionHelpers implements ReflectionHelpersInterface
     }
 
     /**
-     * @param $domain
+     * @param string $domain
+     *
      * @return \Reflector
+     *
      * @throws \ReflectionException
      */
     public function getReflectionClassFromDomain(string $domain): \Reflector
     {
-        return new \ReflectionClass($this->makeDomainFQDN($domain));
+        return new \ReflectionClass(DomainActionNameGenerator::getFQDNClass($domain));
     }
 
     /**
-     * @param $domainFQDN
+     * @param string $domainFQDN
+     *
      * @return \Reflector
+     *
      * @throws \ReflectionException
      */
     public function getReflectionClassFromFQDN(string $domainFQDN): \Reflector
@@ -270,12 +302,45 @@ class ReflectionHelpers implements ReflectionHelpersInterface
     }
 
     /**
-     * @param $domain
-     * @return string
+     * Return the file list of all domains class
+     *
+     * Sorry! This is last minute code... not my best! ;-)
+     *
+     * It violates SRP AND DIP from SOLID(I'll rewrite it!!!) and works with "in code" path!
+     *
+     * @throws \Exception
+     *
+     * TODO: It must improved and fixed ASAP
      */
-    public function makeDomainFQDN(string $domain): string
+    public function getClassListAssociatedToDomains(): FlatListCollection
     {
-        return sprintf("\App\Console\Domains\%s%s", ucfirst($domain), "Domain");
+        $filenamesCollection = new FlatListCollection();
+
+        $scanner = new FlatDirectoryScanner(__DIR__ . "/../../../../app/Console/Domains/", $filenamesCollection);
+
+        $scanner->doScan(function ($filename) {
+            return strtolower((string)str_replace(["Domain", ".php"], "", $filename));
+        });
+
+        return $filenamesCollection;
+    }
+
+    /**
+     * return array $synopsis
+     *
+     * @throws \ReflectionException
+     */
+    function getSynopsisFromDomains(): array
+    {
+        $synopsis = [];
+
+        foreach ($this->getClassListAssociatedToDomains() as $domain) {
+            if ($domain !== "command") {
+                $synopsis[$domain] = $this->getDomainSynopsis(DomainActionNameGenerator::getFQDNClass($domain));
+            }
+        }
+
+        return $synopsis;
     }
 
 }

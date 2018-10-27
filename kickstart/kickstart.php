@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/Arun
+ * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
  *
  * Low level startup... for OOP code see ArunCore ;-)
@@ -39,6 +39,8 @@ require __DIR__ . "/../app/Helpers/Conf.php";
 
 /**
  * Initialize ENV
+ *
+ * ENV is loaded everytime... I will create a Domain for managing Arun itself!
  */
 $dotenv = new Dotenv\Dotenv(__DIR__."/../", '.envcli');
 $dotenv->overload();
