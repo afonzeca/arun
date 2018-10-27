@@ -26,18 +26,42 @@
 namespace App\Managers\Cmd;
 
 use ArunCore\Abstracts\BaseDomainCommand;
+use ArunCore\Core\Domain\DomainActionNameGenerator;
 use ArunCore\Traits\CmdManagers\DependencyInjectionCapabilities;
+
+use ArunCore\Annotations as SET;
 
 abstract class DomainCommand extends BaseDomainCommand
 {
-    use DependencyInjectionCapabilities;
-
     /**
+     * @SET\ActionEnabled(true)
+     * @SET\ActionSyn("This help")
+     *
      * Default help when undefined
+     *
+     * @throws
      */
     public function help()
     {
-        echo "No available help for this command\r\n";
+        $className = (new \ReflectionClass($this))->getName();
+
+        $this->helpGen->makeHelpMessage(
+            $className,
+            DomainActionNameGenerator::extractDomainNameFromClassName($className)
+            , false
+        );
     }
 
+    /**
+     * @SET\ActionEnabled(true)
+     * @SET\ActionSyn("Help alias")
+     *
+     * The default Action called when Arun is called without parameters.
+     * Replace with your code if need
+     *
+     */
+    public function default()
+    {
+        $this->help();
+    }
 }

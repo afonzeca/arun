@@ -23,9 +23,11 @@
  * Time: 19.09
  */
 
-namespace ArunCore\Interfaces\Domain;
+namespace ArunCore\Interfaces\Helpers;
 
-interface DomainUtilsInterface
+use Doctrine\Common\Annotations\Reader;
+
+interface ReflectionHelpersInterface
 {
     /**
      * Check if the number of parameters from command line
@@ -49,4 +51,61 @@ interface DomainUtilsInterface
      * @throws \Exception
      */
     public function getReCastedParameters(string $className, string $action, array $realParameters): array;
+
+    /**
+     * @param $antReader
+     * @param $methodsList
+     * @return mixed
+     */
+    public function getEnabledActionsAnnotations($methodsList);
+
+    /**
+     * @param string $className
+     * @param string $domain
+     *
+     * @return string
+     *
+     * @throws \ReflectionException
+     */
+    public function getDomainSynopsis(string $className, string $domain): string;
+
+    /**
+     * @param string $domain
+     * @return bool
+     *
+     */
+    public function isDomainEnabled(string $domain): bool;
+
+    /**
+     * @param $domain
+     * @param $action
+     *
+     * @return bool
+     * @throws \ReflectionException
+     */
+    public function isActionEnabled($domain, $action);
+
+    /**
+     * @param string $className
+     * @param string $domain
+     *
+     * @return mixed
+     *
+     * @throws \ReflectionException
+     */
+    public function getClassPublicMethods(string $className, string $domain);
+
+    /**
+     * @param $domain
+     * @return \ReflectionClass
+     *
+     * @throws \ReflectionException
+     */
+    public function getReflectionClassFromDomain(string $domain);
+
+    /**
+     * @param $domain
+     * @return string
+     */
+    public function makeDomainFQDN(string $domain): string;
 }

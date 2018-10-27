@@ -31,4 +31,12 @@ return [
             "help" => [],
         ],
     ],
+    "test" => [
+        "general" => [
+            "description" => "This is a test!"
+        ],
+        "actions" => [
+            "hello" => ["This is a test action!","[--b] [--c]","c"],
+        ],
+    ],
 ];

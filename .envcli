@@ -4,7 +4,6 @@
 # [ Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ )                              ]
 #
 
-
 #
 # APPLICATION NAME
 #
@@ -18,7 +17,7 @@ APP_NAME="Arun"
 # WHITELIST CONFIGURATION
 #
 WHITELIST_NAME="whiteList"
-APP_VERSION="0.3alpha"
+APP_VERSION="0.4alpha"
 
 #
 # COMMAND LINE COLORS (0 = disabled, 1 = enabled)

@@ -31,7 +31,7 @@ use ArunCore\Interfaces\IO\ConsoleInputInterface;
 use ArunCore\Interfaces\IO\ConsoleOutputInterface;
 use ArunCore\Interfaces\Domain\DomainActionExecutorInterface;
 use ArunCore\Interfaces\Domain\DomainActionNameGeneratorInterface;
-use ArunCore\Interfaces\Domain\DomainUtilsInterface;
+use ArunCore\Interfaces\Helpers\ReflectionHelpersInterface;
 use ArunCore\Interfaces\Core\ArunCoreInterface;
 use ArunCore\Interfaces\Security\SanitizerInterface;
 use App\Helpers\Conf;
@@ -42,9 +42,9 @@ return [
 
     SanitizerInterface::class => DI\get("ArunCore\\Core\\Helpers\\Sanitizer"),
 
-    DomainUtilsInterface::class => DI\autowire("ArunCore\\Core\\Domain\\DomainUtils"),
-
     DomainActionExecutorInterface::class => DI\autowire("ArunCore\\Core\\Domain\\DomainActionExecutor"),
+
+    ArunCore\Interfaces\Helpers\ReflectionHelpersInterface::class => DI\get("ArunCore\\Core\\Helpers\\ReflectionHelpers"),
 
     ConsoleInputInterface::class => DI\autowire("ArunCore\\Core\\IO\\ConsoleInput")
         ->constructorParameter("args", $_SERVER["argv"]),
@@ -53,10 +53,17 @@ return [
         ->constructorParameter("enableColors", getenv("COLORS")),
 
     DomainActionNameGeneratorInterface::class => DI\autowire("ArunCore\\Core\\Domain\\DomainActionNameGenerator")
-        ->constructorParameter("whiteListName", "%s/".\App\Helpers\Conf\get("whiteListName"))
+        ->constructorParameter("whiteListName", "%s/" . \App\Helpers\Conf\get("whiteListName"))
         ->constructorParameter("basePath", ((new SplFileInfo(__DIR__))->getRealPath()) . "/../"),
 
     HelpGeneratorInterface::class => DI\autowire("ArunCore\\Core\\Helpers\\HelpGenerator")
-        ->constructorParameter("helpContent", include(sprintf("%s".\App\Helpers\Conf\get("whiteListName"), (new SplFileInfo(__DIR__))->getRealPath() . "/../")))
-
+        ->constructorParameter(
+            "helpContent",
+            include sprintf(
+                "%s%s",
+                (new SplFileInfo(__DIR__))->getRealPath() . "/../",
+                \App\Helpers\Conf\get("whiteListName")
+            )
+        ),
+    Doctrine\Common\Annotations\Reader::class => DI\get("Doctrine\Common\Annotations\AnnotationReader")
 ];

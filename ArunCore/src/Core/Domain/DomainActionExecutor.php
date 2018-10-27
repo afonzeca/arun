@@ -30,7 +30,7 @@ namespace ArunCore\Core\Domain;
 
 use ArunCore\Interfaces\IO\ConsoleInputInterface;
 use ArunCore\Interfaces\Domain\DomainActionExecutorInterface;
-use ArunCore\Interfaces\Domain\DomainUtilsInterface;
+use ArunCore\Interfaces\Helpers\ReflectionHelpersInterface;
 
 class DomainActionExecutor implements DomainActionExecutorInterface
 {
@@ -51,9 +51,9 @@ class DomainActionExecutor implements DomainActionExecutorInterface
     /**
      * An Helper class for analyzing a class that represents a Domain
      *
-     * @var DomainUtilsInterface $utils
+     * @var ReflectionHelpersInterface $reflection
      */
-    private $utils;
+    private $reflection;
 
     /**
      * DomainAction constructor.
@@ -65,17 +65,17 @@ class DomainActionExecutor implements DomainActionExecutorInterface
      * This class is a stateless service, so no setters are present.
      *
      * @param \Di\FactoryInterface
-     * @param DomainUtilsInterface $utils
+     * @param ReflectionHelpersInterface $reflection
      * @param ConsoleInputInterface $ConsoleInput
      */
     public function __construct(
         \Di\FactoryInterface $container,
-        DomainUtilsInterface $utils,
+        ReflectionHelpersInterface $reflection,
         ConsoleInputInterface $ConsoleInput
     )
     {
         $this->container = $container;
-        $this->utils = $utils;
+        $this->reflection = $reflection;
         $this->cInput = $ConsoleInput;
     }
 
@@ -86,8 +86,9 @@ class DomainActionExecutor implements DomainActionExecutorInterface
      * This method uses Factory for making the Class (because DOMAINS are not services, we do not store it into the
      * container)
      *
-     * @param $className
-     * @param $action
+     * @param string $className
+     * @param string $domain
+     * @param string $action
      *
      * @throws \Exception
      * @throws \DI\DependencyException
@@ -97,18 +98,23 @@ class DomainActionExecutor implements DomainActionExecutorInterface
      * @return bool
      */
     public function exec(
-        $className,
-        $action
+        string $className,
+        string $domain,
+        string $action
     ): bool
     {
         if (class_exists($className)) {
-            $numOfMandatoryParams = $this->utils->numberOfMandatoryParameters($className, $action);
-            $realParameters = $this->cInput->getParams();
 
-            $numOfMandatoryParams <= count($this->cInput->getParams()) ?: $action = "help";
-            $this->makeObjectAndRunMethod($className, $action, $realParameters);
+            if ($this->reflection->isDomainEnabled($domain)) {
+                $numOfMandatoryParams = $this->reflection->numberOfMandatoryParameters($className, $action);
+                $realParameters = $this->cInput->getParams();
 
-            return true;
+                $numOfMandatoryParams <= count($this->cInput->getParams()) ?: $action = "help";
+
+                $this->makeObjectAndRunMethod($className, $action, $realParameters);
+
+                return true;
+            }
         }
 
         $this->makeObjectAndRunMethod("App\Managers\Cmd\DefaultDomain", "help", []);
@@ -126,8 +132,12 @@ class DomainActionExecutor implements DomainActionExecutorInterface
      */
     private function makeObjectAndRunMethod($className, $action, $realParameters): void
     {
+        if (!$this->reflection->isActionEnabled($className, $action)) {
+            $action = "help";
+        }
+
         $this->container->make($className)
             ->{$action}
-            (...($this->utils->getReCastedParameters($className, $action, $realParameters)));
+            (...($this->reflection->getReCastedParameters($className, $action, $realParameters)));
     }
 }

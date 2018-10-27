@@ -212,7 +212,20 @@ class DomainActionNameGenerator implements DomainActionNameGeneratorInterface
 
         $className = sprintf("\\App\\Managers\\Cmd\\%sDomain", ucfirst($domain));
 
-        return [$className, $action];
+        return [$className, $domain, $action];
+    }
+
+    /**
+     * @param $class
+     * @return string
+     *
+     * @throws \ReflectionException
+     */
+    public static function extractDomainNameFromClassName($class)
+    {
+        $classNameWithoutNs = (new \ReflectionClass($class))->getShortName();
+
+        return strtolower((string)str_replace("Domain", "", $classNameWithoutNs));
     }
 
 }

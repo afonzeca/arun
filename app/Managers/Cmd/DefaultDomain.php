@@ -27,17 +27,41 @@
 
 namespace App\Managers\Cmd;
 
+use ArunCore\Annotations as SET;
+use ArunCore\Core\Domain\DomainActionNameGenerator;
+
+/**
+ * Class DefaultDomain
+ *
+ * @SET\DomainEnabled(true)
+ * @SET\DomainSyn("This is the default class when you call arun without domain and actions")
+ *
+ * @package App\Managers\Cmd
+ */
 class DefaultDomain extends DomainCommand
 {
     /**
+     * @SET\ActionEnabled(true)
+     * @SET\ActionSyn("Generic help for the whole application")
+     *
      * @throws \ReflectionException
      */
     public function help()
     {
-        $this->helpGen->makeHelpMessage("default", self::class, true);
+        $className = (new \ReflectionClass($this))->getName();
+
+        $this->helpGen->makeHelpMessage(
+            $className,
+            DomainActionNameGenerator::extractDomainNameFromClassName($className)
+            , true
+        );
     }
 
     /**
+     * @SET\ActionEnabled(true)
+     * @SET\ActionSyn("Default Arun Action")
+     *
+     * The default Action called when Arun is called without parameters.
      * Replace with your code if need
      *
      * @throws \ReflectionException

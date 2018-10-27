@@ -33,10 +33,11 @@ interface HelpGeneratorInterface
      * The classInstance parameters allows to inspect the class methods and their syntax for checking number of parameters, type,
      * and optional flags
      *
-     * @param $domain
-     * @param $classInstance
+     * @param string $className
+     * @param string $domain
+     * @param bool $global
      *
      * @throws \ReflectionException
      */
-    public function makeHelpMessage($domain, $classInstance, $global = false);
+    public function makeHelpMessage(string $className, string $domain, bool $global = false): void;
 }

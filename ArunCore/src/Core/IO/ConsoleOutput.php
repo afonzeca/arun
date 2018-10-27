@@ -34,6 +34,18 @@ class ConsoleOutput implements ConsoleOutputInterface
 
     private $enableColors;
 
+    /**
+     * ConsoleOutput constructor.
+     * @param $enableColors
+     */
+    public function __construct($enableColors)
+    {
+        $this->enableColors = (bool)$enableColors;
+    }
+    /**
+     * @param string $text
+     * @return mixed
+     */
     protected function convertColors(string $text)
     {
         $colorTableCodes = "";
@@ -46,11 +58,17 @@ class ConsoleOutput implements ConsoleOutputInterface
         return str_replace($colorTableNames, $colorTableCodes, $text);
     }
 
+    /**
+     * @param string $string
+     */
     public function write(string $string)
     {
         echo $this->convertColors($string);
     }
 
+    /**
+     * @param string $string
+     */
     public function writeln(string $string)
     {
         echo $this->convertColors($string) . "\r\n";
@@ -61,8 +79,4 @@ class ConsoleOutput implements ConsoleOutputInterface
         echo "\r\n";
     }
 
-    public function __construct($enableColors)
-    {
-        $this->enableColors = (bool)$enableColors;
-    }
 }

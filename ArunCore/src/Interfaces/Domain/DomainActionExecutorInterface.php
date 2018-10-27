@@ -33,8 +33,9 @@ interface DomainActionExecutorInterface
      * This EXEC method uses Factory for making the Class (because DOMAINS are not services, we do not store them into the
      * container)
      *
-     * @param $className
-     * @param $action
+     * @param string $className
+     * @param string $domain
+     * @param string $action
      *
      * @throws \Exception
      * @throws \DI\DependencyException
@@ -44,5 +45,5 @@ interface DomainActionExecutorInterface
      * @return bool
      */
 
-    public function exec($className, $action): bool;
+    public function exec(string $className, string $domain, string $action): bool;
 }
