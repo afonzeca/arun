@@ -29,13 +29,13 @@ List of changes:
 		   1) Changed project name from Bosun to Arun.
 		   2) Changed core and namespaces according to point 1
 		   3) Namespaced "conf" function
-		   4) Publishing Date: 2019-10-26.
+		   4) Publishing Date: 2018-10-26.
 
 
 * v0.2-alpha	- First public release published on GitHub.
 
            	   1) Published as Bosun CLI Microframework
-           	   2) Publishing Date: 2019-10-20.
+           	   2) Publishing Date: 2018-10-20.
 
 
 
