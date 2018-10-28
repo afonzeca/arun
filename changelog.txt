@@ -22,7 +22,7 @@ List of changes:
 		   under app/Console/Domains
 		   10) Conf global function has been namespaced
 		   11) Some Internals renamed
-		   12) It will be published on 2019-10-28
+		   12) It will be published on 2018-10-28
 
 * v0.3-alpha	- Changes made:
 
