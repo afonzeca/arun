@@ -545,6 +545,10 @@ The next release will hopefully includes:
 3) Support for creating Arun Classes (DOMAINs) with internal DOMAIN/ACTIONS... You don't need to copy and paste anymore from this docs!
 4) More complete and full Unit Tests
 5) Mandatory or "optional" options
+6) Separation between ArunCore (/ArunCore directory) and the "boilerplate" for APP development
+7) Pubblication on Packagist of ArunCore and Arun boilerplate (In the future you will call "composer create-project afonzeca/ 
+arun myprojectname" and you will get an Arun ready project for your development! )
+8) MVC support (I'll examplain the idea in the future ;-) )
 
 See the "changelog.txt" file inside the package for checking the changes compared to the previous version.
 
