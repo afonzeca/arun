@@ -548,7 +548,7 @@ The next release will hopefully includes:
 6) Separation between ArunCore (/ArunCore directory) and the "boilerplate" for APP development
 7) Pubblication on Packagist of ArunCore and Arun boilerplate (In the future you will call "composer create-project afonzeca/ 
 arun myprojectname" and you will get an Arun ready project for your development! )
-8) MVC support (I'll examplain the idea in the future ;-) )
+8) MVC support ( I will explain the idea in the future ;-) )
 
 See the "changelog.txt" file inside the package for checking the changes compared to the previous version.
 
