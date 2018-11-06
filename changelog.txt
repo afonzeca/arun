@@ -58,6 +58,3 @@ List of changes:
 
            	   1) Published as Bosun CLI Microframework
            	   2) Publishing Date: 2018-10-20.
-
-
-
