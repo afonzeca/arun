@@ -77,8 +77,8 @@ inside the created "arun" folder run
 composer install 
 ```
 
-In the next releases I will split the Arun core from the framework "boilerplate" and I will publish
-everything on Packagist.org so Composer can be used for creating Arun Projects!
+NOTE: the ArunCore has been separated from Arun since the 0.41-alpha version. The "core" will be installed by composer automatically (I'll find it under vendor/afonzeca/arun-core). Please check [Arun-Core on Github](https://github.com/afonzeca/arun-core) for further details and API library documentation.
+
  
 _DISCLAIMER: This product is a prototype at early stage of development and could have security issues... DO NOT USE IN PRODUCTION ENVIRONMENTS_
 
@@ -154,7 +154,7 @@ Now you can call your new command with
 Arun will to the job for you...
 
 
-### How annotation works? ###
+### How annotations work? ###
 
 As you can see in the example above, there are @SET\SomeThing inside the comments... they are called "annotations")
 (they are also used in PhpDoc if you are familiar with it).
@@ -545,10 +545,9 @@ The next release will hopefully includes:
 3) Support for creating Arun Classes (DOMAINs) with internal DOMAIN/ACTIONS... You don't need to copy and paste anymore from this docs!
 4) More complete and full Unit Tests
 5) Mandatory or "optional" options
-6) Separation between ArunCore (/ArunCore directory) and the "boilerplate" for APP development
-7) Pubblication on Packagist of ArunCore and Arun boilerplate (In the future you will call "composer create-project afonzeca/ 
+6) Pubblication on Packagist of Arun boilerplate (In the future you will call "composer create-project afonzeca/ 
 arun myprojectname" and you will get an Arun ready project for your development! )
-8) MVC support ( I will explain the idea in the future ;-) )
+7) MVC support ( I will explain the idea in the future ;-) )
 
 See the "changelog.txt" file inside the package for checking the changes compared to the previous version.
 

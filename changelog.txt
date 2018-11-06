@@ -1,5 +1,27 @@
 List of changes:
 
+List of changes:
+
+
+* v0.41-alpha	- Changes Made:
+
+		  1) The Arun Package splitted in two projects
+
+			* arun-core at https://github.com/afonzeca/arun-core
+			* arun framework (boilerplate) at https://github.com/afonzeca/arun
+
+		  2) Arun-core API docs (API documentation)
+
+		  3) Published on 2018-11-06
+
+		  4) Arun microframework (this repository) has been updated
+		  for external core support (changes to container/core.php,
+		  composer.json and the whole documentation) 
+
+		  5) All "core" code removed from this repository and
+		  replublished on arun-core repository (refer to point 1)
+
+
 * v0.4-alpha	- Changes made:
 
 		   1) Removed static whitelists for the "help definition" and for

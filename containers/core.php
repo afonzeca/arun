@@ -39,7 +39,8 @@ return [
 
     DomainActionExecutorInterface::class => DI\autowire("ArunCore\\Core\\Domain\\DomainActionExecutor"),
 
-    LowLevelHelperInterface::class => DI\get("ArunCore\\Core\\Helpers\\LowLevelHelper"),
+    LowLevelHelperInterface::class => DI\autowire("ArunCore\\Core\\Helpers\\LowLevelHelper")
+        ->constructorParameter("basePath",realpath(__DIR__."/../")),
 
     ConsoleInputInterface::class => DI\autowire("ArunCore\\Core\\IO\\ConsoleInput")
         ->constructorParameter("args", $_SERVER["argv"]),
