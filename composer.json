@@ -1,23 +1,55 @@
 {
+  "name": "afonzeca/arun",
+  "description": "Arun CLI Microframework for Php 7.2+",
+  "keywords": [
+    "microframework",
+    "framework",
+    "arun",
+    "arun-core",
+    "cli"
+  ],
+  "type": "project",
+  "time": "2018-11-06",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/afonzeca/arun",
+  "support": {
+    "issues": "https://github.com/afonzeca/arun/issues",
+    "source": "https://github.com/afonzeca/arun"
+  },
+  "authors": [
+    {
+      "name": "Angelo Fonzeca",
+      "role": "Creator / Main Developer",
+      "homepage": "https://www.linkedin.com/in/angelo-f-1806868/"
+    }
+  ],
   "require": {
     "php": ">=7.2.0",
+    "ext-mbstring": "*",
     "php-di/php-di": "^6.0",
     "vlucas/phpdotenv": "^2.5",
     "afonzeca/arun-core": "v0.41-alpha",
     "doctrine/annotations": "^1.6",
-    "symfony/event-dispatcher": "^4.1",
     "doctrine/doctrine-bundle": "^1.9",
     "doctrine/doctrine-module": "^2.1",
-    "doctrine/doctrine-orm-module": "^2.1"
+    "doctrine/doctrine-orm-module": "^2.1",
+    "symfony/event-dispatcher": "^4.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.3",
+    "phpunit/php-invoker": "^2.0"
+  },
+  "suggest": {
+    "spatie/phpunit-watcher": "^1.6"
   },
   "autoload": {
     "psr-4": {
       "App\\": "app/"
     }
   },
-  "require-dev": {
-    "spatie/phpunit-watcher": "^1.6",
-    "phpunit/phpunit": "^7.3",
-    "phpunit/php-invoker": "^2.0"
+  "autoload-dev": {
+    "psr-4": {
+      "App\\Tests\\": "tests/"
+    }
   }
 }
