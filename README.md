@@ -61,23 +61,19 @@ parameters, value mapping, etc.
 
 Anyway... Too much words... Now Let's making some code... ;-)
 
-### How to install
+### How to create an Arun "Ready-to-go" project
 
-You need php 7.2, Composer and Git installed on your machine (for now tested only on Linux/Ubuntu/Mint).
-
-Git clone the repository 
+You need php 7.2 and Composer installed (https://getcomposer.org) on your machine (tested only on Linux/Ubuntu/Mint).
 
 ```bash
-git clone https://github.com/afonzeca/arun.git
+composer create-project afonzeca/arun:v0.41-alpha myprojectname
 ```
 
-inside the created "arun" folder run 
+NOTE: 
 
-```bash
-composer install 
-```
+* Due to project "alpha" stage, you MUST specify the version of the framework, as showed above.
 
-NOTE: the ArunCore has been separated from Arun since the 0.41-alpha version. The "core" will be installed by composer automatically (I'll find it under vendor/afonzeca/arun-core). Please check [Arun-Core on Github](https://github.com/afonzeca/arun-core) for further details and API library documentation.
+* The ArunCore has been separated from Arun since the 0.41-alpha version. The "core" will be installed by composer automatically (You'll find it under vendor/afonzeca/arun-core). Please check [Arun-Core on Github](https://github.com/afonzeca/arun-core) for further details and API library documentation.
 
  
 _DISCLAIMER: This product is a prototype at early stage of development and could have security issues... DO NOT USE IN PRODUCTION ENVIRONMENTS_
@@ -280,7 +276,7 @@ Please write ./arun DOMAIN:help to list the ACTIONS available for a DOMAIN
 ```
 
 
-***Example 3 - Let's use Options (like --i --value="xyz" --check-db -u="root")***
+**Example 3 - Let's use Options (like --i --value="xyz" --check-db -u="root")**
 
 arun supports options (short and long) but only in the format -i=something and --optionIlike=something, the format
 without "=" is not supported (e.g. '-i something').
@@ -489,7 +485,7 @@ For further information regarding the use of Dependency Injection inside Arun pl
 by Matthieu Napoli and contributors.
 
 
-**Example 5 **
+**Example 5**
 
 Inside the Arun package there is a file called "ExampleDomain.php" (under app/Console/Domains) that can be used as base for
 your Domain development. It also shows undocumented features.
@@ -545,9 +541,7 @@ The next release will hopefully includes:
 3) Support for creating Arun Classes (DOMAINs) with internal DOMAIN/ACTIONS... You don't need to copy and paste anymore from this docs!
 4) More complete and full Unit Tests
 5) Mandatory or "optional" options
-6) Pubblication on Packagist of Arun boilerplate (In the future you will call "composer create-project afonzeca/ 
-arun myprojectname" and you will get an Arun ready project for your development! )
-7) MVC support ( I will explain the idea in the future ;-) )
+6) MVC support ( I will explain the idea in the future ;-) )
 
 See the "changelog.txt" file inside the package for checking the changes compared to the previous version.
 
@@ -582,11 +576,11 @@ Sir Clive Sinclair, Tony Tebby, Adriano Olivetti, Brian Kernighan and Dennis Rit
 
 ### About releases
 
-Project link: https://github.com/afonzeca/arun
+Project link: https://github.com/afonzeca/arun ( First version project link: https://github.com/afonzeca/bosun )
 
-( Previous project link: https://github.com/afonzeca/bosun )
+Main core library: https://github.com/afonzeca/arun-core
 
-See changelog.txt inside the package for details about framework improvements.
+See changelog.txt inside the package for further details about framework improvements.
 
 ### Contacts
 
