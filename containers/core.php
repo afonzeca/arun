@@ -30,6 +30,8 @@ use ArunCore\Interfaces\Domain\DomainActionNameGeneratorInterface;
 use ArunCore\Interfaces\Core\ArunCoreInterface;
 use ArunCore\Interfaces\Helpers\LowLevelHelperInterface;
 use ArunCore\Interfaces\Security\SanitizerInterface;
+use ArunCore\Interfaces\CodeBuilders\DomainManipulatorInterface;
+use ArunCore\Interfaces\CodeBuilders\ActionManipulatorInterface;
 
 return [
 
@@ -39,8 +41,12 @@ return [
 
     DomainActionExecutorInterface::class => DI\autowire("ArunCore\\Core\\Domain\\DomainActionExecutor"),
 
+    \ArunCore\Interfaces\IO\FileContentGeneratorInterface::class => DI\autowire("ArunCore\\Core\\IO\\FileContentGenerator")
+        ->constructorParameter("domainsPath", realpath(__DIR__ . "/../" . getenv("DOMAINS")))
+        ->constructorParameter("schemasPath", realpath(__DIR__ . "/../" . getenv("SCHEMAS"))),
+
     LowLevelHelperInterface::class => DI\autowire("ArunCore\\Core\\Helpers\\LowLevelHelper")
-        ->constructorParameter("basePath",realpath(__DIR__."/../")),
+        ->constructorParameter("basePath", realpath(__DIR__ . "/../")),
 
     ConsoleInputInterface::class => DI\autowire("ArunCore\\Core\\IO\\ConsoleInput")
         ->constructorParameter("args", $_SERVER["argv"]),
@@ -49,6 +55,10 @@ return [
         ->constructorParameter("enableColors", getenv("COLORS")),
 
     DomainActionNameGeneratorInterface::class => DI\autowire("ArunCore\\Core\\Domain\\DomainActionNameGenerator"),
+
+    DomainManipulatorInterface::class => DI\autowire("ArunCore\\Core\\CodeBuilders\\DomainManipulator"),
+
+    ActionManipulatorInterface::class => DI\autowire("ArunCore\\Core\\CodeBuilders\\ActionManipulator"),
 
     HelpGeneratorInterface::class => DI\autowire("ArunCore\\Core\\Helpers\\HelpGenerator"),
 

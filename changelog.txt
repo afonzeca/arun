@@ -1,5 +1,11 @@
 List of changes:
 
+* v0.42-alpha   - Changes Made:
+
+          1) Arun code auto-generation (Domains, Actions, Parameters), thanks to domain "gen" included "out-of-the-box"
+          2) @SET\DomainEnabled and @SET\ActionEnabled fixed
+          3) Improved documentation (README.md)
+	      4) Published on 2018-11-14
 
 * v0.41-alpha	- Changes Made:
 
@@ -17,7 +23,7 @@ List of changes:
 		  composer.json and the whole documentation) 
 
 		  5) All "core" code removed from this repository and
-		  replublished on arun-core repository (refer to point 1)
+		  republished on arun-core repository (refer to point 1)
 
 
 * v0.4-alpha	- Changes made:

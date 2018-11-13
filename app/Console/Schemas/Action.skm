@@ -1,0 +1,14 @@
+
+    /**
+     *
+     * ##!ACTIONNAME!## - ##!SYNOPSIS!##
+     *
+     * @SET\ActionEnabled(##!ENABLED!##)
+     * @SET\ActionSyn("##!SYNOPSIS!##")
+     *
+     * @SET\ActionEOA("##!ACTIONNAME!##")
+     */
+    public function ##!ACTIONNAME!##()
+    {
+        $this->cOut->writeln("This action must be defined.");
+    }

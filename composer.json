@@ -28,7 +28,7 @@
     "ext-mbstring": "*",
     "php-di/php-di": "^6.0",
     "vlucas/phpdotenv": "^2.5",
-    "afonzeca/arun-core": "v0.41-alpha",
+    "afonzeca/arun-core": "v0.42-alpha",
     "doctrine/annotations": "^1.6",
     "doctrine/doctrine-bundle": "^1.9",
     "doctrine/doctrine-module": "^2.1",
