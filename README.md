@@ -84,6 +84,10 @@ Anyway... Too much words... Now Let's making some code... ;-)
 
 ### Create an Arun project
 
+<p align="center">
+<img src="docs/video/demo.gif">
+</p>
+
 You need php 7.2 and Composer installed (https://getcomposer.org) on your machine (tested only on Linux/Ubuntu/Mint).
 
 ```bash
