@@ -264,11 +264,11 @@ It is easy to set optional parameters... Type hint your method parameter and set
    public function create(string $tableName, string $primaryKey="id", string $defaultDb="mydb")
    {
      // It will print "users" because it is the parameter passed from CLI
-     printf("Default Db %s\r",$defaultDb);
+     printf("Default Db %s\n",$defaultDb);
      // your code here
-     printf("Primary key %s\r",$primaryKey);
+     printf("Primary key %s\n",$primaryKey);
      // your code here
-     printf("Creating table...%s\r",$tableName);
+     printf("Creating table...%s\n",$tableName);
      // your code here
      //....
      //other code...
@@ -357,7 +357,7 @@ In our previous example add the following code to the "create" method above
 ```php
 
   if($this->hasOption("u")){
-             printf("The value of -u is %s\r",$this->getOptionValue("u"));
+             printf("The value of -u is %s\n",$this->getOptionValue("u"));
          }
 
 ```
@@ -470,18 +470,18 @@ class TableDomain extends DomainCommand
     {
 
         // It will print "users" because it is the parameter passed from CLI
-        printf("Default Db %s\r", $defaultDb);
+        printf("Default Db %s\n", $defaultDb);
         // your code here
-        printf("Primary key %s\r", $primaryKey);
+        printf("Primary key %s\n", $primaryKey);
         // your code here
-        printf("Creating table...%s\r", $tableName);
+        printf("Creating table...%s\n", $tableName);
         // your code here
         //....
         //other code...
         //....
 
         if ($this->hasOption("u")) {
-            printf("The value of -u is %s\r", $this->getOptionValue("u"));
+            printf("The value of -u is %s\n", $this->getOptionValue("u"));
         }
 
         if ($this->hasOption("l")) {
