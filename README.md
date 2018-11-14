@@ -1,5 +1,9 @@
 ## "Arun" (CLI Microframework) for PHP7.2+ - Version 0.43-alpha - (C) 2018 by Angelo Fonzeca
 
+<p align="center">
+<img src="docs/images/arunlogo.jpg">
+</p>
+
 ### Summary ###
 
 
