@@ -534,7 +534,7 @@ For further information regarding the use of Dependency Injection inside Arun pl
 by Matthieu Napoli and contributors.
 
 
-**Tutorial 6 - ExampleDomain **
+**Tutorial 6 - ExampleDomain**
 
 Inside the Arun package there is a file called "ExampleDomain.php" (under app/Console/Domains) that can be used as base for
 your Domain development. It also shows undocumented features.
