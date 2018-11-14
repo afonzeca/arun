@@ -63,6 +63,10 @@ thanks to "annotations" (special comments inside classes).
 
 By using annotations it is also possible to define options and their help description.
 
+<p align="center">
+<img src="docs/video/demo.gif">
+</p>
+
 ### Why Arun was born?
 
 Arun was born as a tool for creating a full working framework called "Sensuikan" on which I'm working on. Anyway during the development I realized
@@ -83,10 +87,6 @@ parameters, value mapping, etc.
 Anyway... Too much words... Now Let's making some code... ;-)
 
 ### Create an Arun project
-
-<p align="center">
-<img src="docs/video/demo.gif">
-</p>
 
 You need php 7.2 and Composer installed (https://getcomposer.org) on your machine (tested only on Linux/Ubuntu/Mint).
 
