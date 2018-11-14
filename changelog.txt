@@ -1,6 +1,6 @@
 List of changes:
 
-* v0.42a-alpha   - Changes Made:
+* v0.43-alpha   - Changes Made:
 
           1) Arun code auto-generation (Domains, Actions, Parameters), thanks to domain "gen" included "out-of-the-box"
           2) @SET\DomainEnabled and @SET\ActionEnabled fixed
