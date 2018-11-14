@@ -105,6 +105,7 @@ Before starting let's create the first project with:
 
 ```bash
 composer create-project afonzeca/arun:v0.43-alpha MyFirstArunApplication
+cd MyFirstArunApplication
 ```
 
 **Tutorial 1 - How to write basic command line application**
