@@ -907,7 +907,7 @@ The next releases will hopefully include:
 
 * Support for full color, tables and fancy things for outputting information
 * Security improvements
-* Mych more complete and full Unit Tests
+* Much more complete and full Unit Tests
 * Mandatory or "optional" options
 * MVC support ( I will explain the idea in the future ;-) )
 * Sub-commands
