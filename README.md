@@ -1,4 +1,4 @@
-## "Arun" (CLI Microframework) for PHP7.2+ - Version 0.42-alpha - (C) 2018 by Angelo Fonzeca
+## "Arun" (CLI Microframework) for PHP7.2+ - Version 0.42a-alpha - (C) 2018 by Angelo Fonzeca
 
 ### Summary ###
 
@@ -6,6 +6,7 @@
 * [What is Arun?](#what-is-arun)
 * [It is magic!](#it-is-magic)
 * [Why Arun was born?](#why-arun-was-born)
+* [Create an Arun project](#create-an-arun-project)
 * [Coding Tutorials](#coding-tutorials)
 * [Code Auto Generation](#code-auto-generation)
 * [Configuration File Support](#configuration-file-support)
@@ -25,7 +26,7 @@ managing commands and associated code (your console application).
 The Arun Microframework has an "out-of-the-box" native support for Dependency Injection by using _Containers_ and _Autowire_
 (thanks to PHP-DI) and an organized tree for easily writing your code in a simple way.
 
-Starting from the 0.42-alpha version, Arun can auto-generate code for fast and easy development (See Chapter 'Code Auto-Generation' for further information).
+Starting from the 0.42a-alpha version, Arun can auto-generate code for fast and easy development (See Chapter 'Code Auto-Generation' for further information).
 
 _DISCLAIMER: This product is a prototype at an early stage of development and could have security issues... DO NOT USE IT IN PRODUCTION ENVIRONMENTS_
 
@@ -77,12 +78,12 @@ parameters, value mapping, etc.
 
 Anyway... Too much words... Now Let's making some code... ;-)
 
-### How to create an Arun "Ready-to-go" project
+### Create an Arun project
 
 You need php 7.2 and Composer installed (https://getcomposer.org) on your machine (tested only on Linux/Ubuntu/Mint).
 
 ```bash
-composer create-project afonzeca/arun:v0.42-alpha myprojectname
+composer create-project afonzeca/arun:v0.42a-alpha myprojectname
 ```
 
 NOTE:
@@ -103,7 +104,7 @@ If you want skip examples and read about auto-generation code directly (not reco
 Before starting let's create the first project with:
 
 ```bash
-composer create-project afonzeca/arun:v0.42-alpha MyFirstArunApplication
+composer create-project afonzeca/arun:v0.42a-alpha MyFirstArunApplication
 ```
 
 **Tutorial 1 - How to write basic command line application**
@@ -181,7 +182,7 @@ Arun will do the job for you...
 ```bash
 ./arun table
 
-Arun Microframework 0.42-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
+Arun Microframework 0.42a-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
 
 Table: This Domain allows to interact with tables
 
@@ -282,7 +283,7 @@ Now you can call Arun with one, two, or three parameters...
 If you type ./arun table:create without parameters you will receive an automatic help... like this:
 
 ```
-Arun Microframework 0.42-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
+Arun Microframework 0.42a-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
 
 Table: Table creation
 
@@ -302,7 +303,7 @@ create
 if you type ./arun without commands, actions, etc. you will receive a "global help" like this:
 
 ```
-Arun Microframework 0.42-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
+Arun Microframework 0.42a-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
 
 Default: A Convention Over Configuration CLI Micro-Framework
 
@@ -549,7 +550,7 @@ ARUN has a built-in domain called "gen" dedicated to code-generation. Let's see 
 
 ./arun gen
 
-Arun Microframework 0.42-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
+Arun Microframework 0.42a-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
 
 Gen: Generates code for Arun Development Speed-up
 
