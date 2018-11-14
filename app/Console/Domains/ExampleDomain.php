@@ -48,11 +48,11 @@ class ExampleDomain extends DomainCommand
      */
     public function hello($name, $yourPlanet = "Earth")
     {
-        $this->cOut->writeln("\r\nHi, #RED#$name#DEF#! Do you came from planet $yourPlanet?");
+        $this->cOut->writeln("\rHi, #RED#$name#DEF#! Do you came from planet $yourPlanet?");
         if ($this->hasOption("say-hello-to-friend")) {
 
             $friendName = $this->getOptionValue("say-hello-to-friend");
-            $this->cOut->writeln("\r\nI'm pleased to say hello to your friend #LGRAY#$friendName#DEF#\r\n");
+            $this->cOut->writeln("\rI'm pleased to say hello to your friend #LGRAY#$friendName#DEF#\r");
 
         }
     }
