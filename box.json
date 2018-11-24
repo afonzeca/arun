@@ -1,0 +1,26 @@
+{
+    "chmod": "0755",
+    "directories": [
+        "app",
+        "containers",
+        "config",
+        "kickstart",
+        "vendor"
+    ],
+    "main": "arun",
+    "files": [
+        "composer.json",
+	"changelog.txt",
+	"license.txt",
+      	"LICENSE",
+    	"notice.txt",
+	".envcli"
+    ],
+    "blacklist": [
+      "GenDomain.php",
+      "ExampleDomain.php"
+    ],
+    "output": "var/boxed/myApp.phar",
+    "annotations": false,
+    "exclude-composer-files": false
+}
