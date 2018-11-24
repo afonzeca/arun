@@ -1,13 +1,21 @@
 List of changes:
 
-* v0.43-alpha   - Changes Made:
+* v0.44 - alpha   - Changes Made:
+		  1) Improved help autogeneration
+		  2) Introducted box.json for PHAR generation
+		  3) Added gen:disableDomain  
+		  4) Added gen:phar for creating .phar self-contained
+		  application package
+		  5) Improved README.md
 
-          1) Arun code auto-generation (Domains, Actions, Parameters), thanks to domain "gen" included "out-of-the-box"
-          2) @SET\DomainEnabled and @SET\ActionEnabled fixed
-          3) Improved documentation (README.md)
-	      4) Published on 2018-11-14
+* v0.43 - alpha   - Changes Made:
 
-* v0.41-alpha	- Changes Made:
+		  1) Arun code auto-generation (Domains, Actions, Parameters), thanks to domain "gen" included "out-of-the-box"
+		  2) @SET\DomainEnabled and @SET\ActionEnabled fixed
+		  3) Improved documentation (README.md)
+		  4) Published on 2018-11-14
+
+* v0.41 - alpha	- Changes Made:
 
 		  1) The Arun Package splitted in two projects
 
@@ -26,7 +34,7 @@ List of changes:
 		  republished on arun-core repository (refer to point 1)
 
 
-* v0.4-alpha	- Changes made:
+* v0.4 - alpha	- Changes made:
 
 		   1) Removed static whitelists for the "help definition" and for
 		   enabling Domains
@@ -50,7 +58,7 @@ List of changes:
 		   11) Some Internals renamed
 		   12) Published on 2018-10-28
 
-* v0.3-alpha	- Changes made:
+* v0.3 - alpha	- Changes made:
 
 		   1) Changed project name from Bosun to Arun.
 		   2) Changed core and namespaces according to point 1
@@ -58,7 +66,7 @@ List of changes:
 		   4) Publishing Date: 2018-10-26.
 
 
-* v0.2-alpha	- First public release published on GitHub.
+* v0.2 - alpha	- First public release published on GitHub.
 
            	   1) Published as Bosun CLI Microframework
            	   2) Publishing Date: 2018-10-20.

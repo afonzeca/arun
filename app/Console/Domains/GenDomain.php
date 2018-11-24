@@ -18,7 +18,7 @@
  *
  * Linkedin contact ( https://www.linkedin.com/in/angelo-f-1806868/ ) - Project @ https://github.com/afonzeca/arun
  *
- * Code Example made using the Arun CLI Micro-framework for PHP7.2+
+ * Arun Code and Phar Generator
  *
  */
 
@@ -26,6 +26,7 @@ namespace App\Console\Domains;
 
 use ArunCore\Interfaces\CodeBuilders\ActionManipulatorInterface;
 use ArunCore\Interfaces\CodeBuilders\DomainManipulatorInterface;
+use ArunCore\Interfaces\System\PharGeneratorRunnerInterface;
 use ArunCore\Traits\Builder\CommonOptions;
 use ArunCore\Traits\Builder\PlaceholderManipulator;
 use ArunCore\Interfaces\IO\FileContentGeneratorInterface;
@@ -54,19 +55,26 @@ class GenDomain extends DomainCommand
     private $amc;
 
     /**
+     * @var PharGeneratorRunnerInterface
+     */
+    private $pharGen;
+
+    /**
      * GenDomain constructor.
      *
-     * @param FileContentGeneratorInterface $fileGen
      * @param DomainManipulatorInterface $dmc
      * @param ActionManipulatorInterface $amc
+     * @param PharGeneratorRunnerInterface $pharGen
+     *
      */
     public function __construct(
-        FileContentGeneratorInterface $fileGen,
         DomainManipulatorInterface $dmc,
-        ActionManipulatorInterface $amc
+        ActionManipulatorInterface $amc,
+        PharGeneratorRunnerInterface $pharGen
     ) {
         $this->dmc = $dmc;
         $this->amc = $amc;
+        $this->pharGen = $pharGen;
     }
 
     /**
@@ -133,7 +141,8 @@ class GenDomain extends DomainCommand
         string $domainName,
         string $actionName,
         string $paramName
-    ): bool {
+    ): bool
+    {
 
         $type = $this->getType("string");
         $defaultValue = $this->getDefault("");
@@ -147,5 +156,51 @@ class GenDomain extends DomainCommand
         );
     }
 
-}
 
+    /**
+     *
+     * phar - Generate a self-contained php phar application executable
+     *
+     * @SET\ActionEnabled(true)
+     * @SET\ActionSyn("This action generates a self-contained php phar application executable")
+     *
+     * @var string $pharAppName
+     * @SET\ActionEOA("phar")
+     *
+     * @throws \Exception
+     */
+    public function phar()
+    {
+        $this->pharGen->exec();
+    }
+
+    /**
+     *
+     * disableDomain - Disable a Domain, so it cannot be used from command line
+     *
+     * @SET\ActionEnabled(true)
+     * @SET\ActionSyn("Disable a Domain, so it cannot be used from command line")
+     *
+     * @var string $domainName
+     * @SET\ActionEOA("disableDomain")
+     */
+    public function disableDomain(string $domainName)
+    {
+        $this->dmc->disableDomain($domainName);
+    }
+
+    /**
+     *
+     * enableDomain - Enable a Domain, so it can be used from command line
+     *
+     * @SET\ActionEnabled(true)
+     * @SET\ActionSyn("Enable a Domain, so it can be used from command line")
+     *
+     * @var string $domainName
+     * @SET\ActionEOA("disableDomain")
+     */
+    public function enableDomain(string $domainName)
+    {
+        $this->dmc->enableDomain($domainName);
+    }
+}

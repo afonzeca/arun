@@ -12,7 +12,7 @@ APP_NAME="Arun"
 #
 # APPLICATION VERSION
 #
-APP_VERSION="0.43-alpha"
+APP_VERSION="0.44-alpha"
 
 #
 # COMMAND LINE COLORS (0 = disabled, 1 = enabled)

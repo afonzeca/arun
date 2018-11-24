@@ -68,6 +68,18 @@ class DefaultDomain extends DomainCommand
      */
     public function default()
     {
-        $this->help();
+        if($this->hasOption("v") || $this->hasOption("version"))
+        {
+            $this->cOut->blank();
+            $this->cOut->writeln("#RED#Arun Microframework ".getenv("APP_VERSION")."#DEF# - (C) 2018 by Angelo Fonzeca (Apache License 2.0)");
+            $this->cOut->blank();
+            $this->cOut->writeln("Please check #CYAN#https://github.com/afonzeca/arun#DEF# for source code and documentation");
+            $this->cOut->blank();
+
+            return;
+        }
+
+       $this->help();
     }
+
 }

@@ -32,6 +32,8 @@ use ArunCore\Interfaces\Helpers\LowLevelHelperInterface;
 use ArunCore\Interfaces\Security\SanitizerInterface;
 use ArunCore\Interfaces\CodeBuilders\DomainManipulatorInterface;
 use ArunCore\Interfaces\CodeBuilders\ActionManipulatorInterface;
+use ArunCore\Interfaces\IO\FileContentGeneratorInterface;
+use ArunCore\Interfaces\System\PharGeneratorRunnerInterface;
 
 return [
 
@@ -41,18 +43,21 @@ return [
 
     DomainActionExecutorInterface::class => DI\autowire("ArunCore\\Core\\Domain\\DomainActionExecutor"),
 
-    \ArunCore\Interfaces\IO\FileContentGeneratorInterface::class => DI\autowire("ArunCore\\Core\\IO\\FileContentGenerator")
-        ->constructorParameter("domainsPath", realpath(__DIR__ . "/../" . getenv("DOMAINS")))
-        ->constructorParameter("schemasPath", realpath(__DIR__ . "/../" . getenv("SCHEMAS"))),
+    FileContentGeneratorInterface::class => DI\autowire("ArunCore\\Core\\IO\\FileContentGenerator")
+        ->constructorParameter("domainsPath", (__DIR__ . "/../" . getenv("DOMAINS")))
+        ->constructorParameter("schemasPath", (__DIR__ . "/../" . getenv("SCHEMAS"))),
 
     LowLevelHelperInterface::class => DI\autowire("ArunCore\\Core\\Helpers\\LowLevelHelper")
-        ->constructorParameter("basePath", realpath(__DIR__ . "/../")),
+        ->constructorParameter("basePath", (__DIR__ . "/../")),
+    //->constructorParameter("basePath", realpath(__DIR__ . "/../")),
 
     ConsoleInputInterface::class => DI\autowire("ArunCore\\Core\\IO\\ConsoleInput")
         ->constructorParameter("args", $_SERVER["argv"]),
 
     ConsoleOutputInterface::class => DI\autowire("ArunCore\\Core\\IO\\ConsoleOutput")
         ->constructorParameter("enableColors", getenv("COLORS")),
+
+    PharGeneratorRunnerInterface::class => DI\autowire("ArunCore\\Core\\System\\PharGeneratorRunner"),
 
     DomainActionNameGeneratorInterface::class => DI\autowire("ArunCore\\Core\\Domain\\DomainActionNameGenerator"),
 
