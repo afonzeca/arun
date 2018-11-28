@@ -1,4 +1,4 @@
-## "Arun" (CLI Microframework) for PHP7.2+ - Version 0.44.1-alpha - (C) 2018 by Angelo Fonzeca
+## "Arun" (CLI Microframework) for PHP7.2+ - Version 0.44.2-alpha - (C) 2018 by Angelo Fonzeca
 
 <p align="center">
 <img src="docs/images/arunlogo.jpg">
@@ -31,7 +31,7 @@ managing commands and associated code (your console application).
 The Arun Microframework has an "out-of-the-box" native support for Dependency Injection by using _Containers_ and _Autowire_
 (thanks to PHP-DI) and an organized tree for easily writing your code in a simple way.
 
-Starting from the 0.44.1-alpha version, Arun can auto-generate code for fast and easy development (See Chapter 'Code Auto-Generation' for further information).
+Starting from the 0.44.2-alpha version, Arun can auto-generate code for fast and easy development (See Chapter 'Code Auto-Generation' for further information).
 
 _DISCLAIMER: This product is a prototype at an early stage of development and could have security issues... DO NOT USE IT IN PRODUCTION ENVIRONMENTS_
 
@@ -94,7 +94,7 @@ Anyway... Too much words... Now Let's making some code... ;-)
 You need php 7.2 and Composer installed (https://getcomposer.org) on your machine (tested only on Linux/Ubuntu/Mint).
 
 ```bash
-composer create-project afonzeca/arun:v0.44.1-alpha myprojectname
+composer create-project afonzeca/arun:v0.44.2-alpha myprojectname
 ```
 
 NOTE:
@@ -115,7 +115,7 @@ If you want skip examples and read about auto-generation code directly (not reco
 Before starting let's create the first project with:
 
 ```bash
-composer create-project afonzeca/arun:v0.44.1-alpha MyFirstArunApplication
+composer create-project afonzeca/arun:v0.44.2-alpha MyFirstArunApplication
 cd MyFirstArunApplication
 ```
 
@@ -194,7 +194,7 @@ Arun will do the job for you...
 ```bash
 ./arun table
 
-Arun Microframework 0.44.1-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
+Arun Microframework 0.44.2-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
 
 Table: This Domain allows to interact with tables
 
@@ -295,7 +295,7 @@ Now you can call Arun with one, two, or three parameters...
 If you type ./arun table:create without parameters you will receive an automatic help... like this:
 
 ```
-Arun Microframework 0.44.1-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
+Arun Microframework 0.44.2-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
 
 Table: Table creation
 
@@ -315,7 +315,7 @@ create
 if you type ./arun without commands, actions, etc. you will receive a "global help" like this:
 
 ```
-Arun Microframework 0.44.1-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
+Arun Microframework 0.44.2-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
 
 Default: A Convention Over Configuration CLI Micro-Framework
 
@@ -562,7 +562,7 @@ ARUN has a built-in domain called "gen" dedicated to code-generation. Let's see 
 
 ./arun gen
 
-Arun Microframework 0.44.1-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
+Arun Microframework 0.44.2-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
 
 Gen: Generates code for Arun Development Speed-up
 
@@ -891,21 +891,34 @@ Arun supports "phar" generation, thanks to Box2 and self-ready configuration "bo
 
 You need three steps to generate the phar:
 
-* Create a bin directory inside your project
-* Download inside bin/ the "box.phar" executable ( download from [https://github.com/humbug/box/releases] ). For example [https://github.com/humbug/box/releases/download/3.3.1/box.phar] 
-* Go to your project root directory, now you can generate your arun.phar by running 
+* Create a bin directory inside your project and change dir with:
+
+```bash
+mkdir bin
+cd bin
+```
+
+* Download inside bin/ the "box.phar" the executable with wget or other tools ( download from [https://github.com/humbug/box/releases] ). For example [https://github.com/humbug/box/releases/download/3.3.1/box.phar]
+* Go to your project root directory
+
+```bash
+cd ..
+```
+
+* Now you can generate your myApp.phar by running
 
 ```bash
 ./arun gen:phar
 ```
 
-* In your project under var/boxed in your project directory you will find your myApp.phar...
+* In your project under var/boxed, you will find your myApp.phar...
 
-* Rename it if you like, with or without .phar extension, and move it in your (/bin) or distribute it!
+* Rename it according to your needs, with or without .phar extension, and move it in your preferred path
 
 NOTES:
 
 * "gen" and "example" domains are disabled by default in your generated .phar application
+
 * If you need to write/edit/manipulate files with your generated .phar application, remember in your code to specify absolute paths and/or use "getcwd" function. The ``` __DIR__ ``` will refer to path INSIDE the package and your code will not work outside that "box".
 
 ### What about the internal Arun Engine? ###
