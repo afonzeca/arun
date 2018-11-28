@@ -94,7 +94,7 @@ Anyway... Too much words... Now Let's making some code... ;-)
 You need php 7.2 and Composer installed (https://getcomposer.org) on your machine (tested only on Linux/Ubuntu/Mint).
 
 ```bash
-composer create-project afonzeca/arun:0.44.2-alpha myprojectname
+composer --stability=alpha create-project afonzeca/arun myprojectname
 ```
 
 NOTE:
@@ -115,7 +115,7 @@ If you want skip examples and read about auto-generation code directly (not reco
 Before starting let's create the first project with:
 
 ```bash
-composer create-project afonzeca/arun:0.44.2-alpha MyFirstArunApplication
+composer --stability=alpha create-project afonzeca/arun myprojectname
 cd MyFirstArunApplication
 ```
 
