@@ -94,7 +94,7 @@ Anyway... Too much words... Now Let's making some code... ;-)
 You need php 7.2 and Composer installed (https://getcomposer.org) on your machine (tested only on Linux/Ubuntu/Mint).
 
 ```bash
-composer create-project afonzeca/arun:v0.44.2-alpha myprojectname
+composer create-project afonzeca/arun:0.44.2-alpha myprojectname
 ```
 
 NOTE:
@@ -115,7 +115,7 @@ If you want skip examples and read about auto-generation code directly (not reco
 Before starting let's create the first project with:
 
 ```bash
-composer create-project afonzeca/arun:v0.44.2-alpha MyFirstArunApplication
+composer create-project afonzeca/arun:0.44.2-alpha MyFirstArunApplication
 cd MyFirstArunApplication
 ```
 
@@ -899,9 +899,10 @@ cd bin
 ```
 
 * Download inside bin/ the "box.phar" the executable with wget or other tools ( download from [https://github.com/humbug/box/releases] ). For example [https://github.com/humbug/box/releases/download/3.3.1/box.phar]
-* Go to your project root directory
+* Set execution permissions and go to your project root directory
 
 ```bash
+chmod 755 box.phar
 cd ..
 ```
 
