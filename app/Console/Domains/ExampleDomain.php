@@ -25,6 +25,7 @@
 namespace App\Console\Domains;
 
 use ArunCore\Annotations as SET;
+use ArunCore\Facades\Sanitizer;
 
 /**
  * Class ExampleDomain
@@ -63,6 +64,6 @@ class ExampleDomain extends DomainCommand
      */
     public function bye()
     {
-        $this->cOut->writeln("Bye");
+        echo "Bye";
     }
 }

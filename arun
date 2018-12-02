@@ -33,8 +33,7 @@ $container = require __DIR__ . "/kickstart/kickstart.php";
  */
 try {
 
-    $App = new \ArunCore\Core\App();
-    $App->setContainer($container);
+    $App = new \ArunCore\Core\App($container);
     $App->run();
 
 } catch (\Exception $ex) {

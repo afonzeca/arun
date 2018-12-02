@@ -1,4 +1,4 @@
-## "Arun" (CLI Microframework) for PHP7.2+ - Version 0.44.2-alpha - (C) 2018 by Angelo Fonzeca
+## "Arun" (CLI Microframework) for PHP7.2+ - Version 0.45-alpha - (C) 2018 by Angelo Fonzeca
 
 <p align="center">
 <img src="docs/images/arunlogo.jpg">
@@ -15,6 +15,7 @@
 * [Code Auto Generation](#code-auto-generation)
 * [Configuration File Support](#configuration-file-support)
 * [Phar self-contained executable generation](#phar-self-contained-executable-generation)
+* [Facades support](#facades-support)
 * [What about the internal Arun Engine?](#what-about-the-internal-arun-engine)
 * [What's next?](#whats-next)
 * [License Info](#license-info)
@@ -29,9 +30,11 @@ frameworks/libraries (Like Symfony Console component, Silly, etc.) because Arun 
 managing commands and associated code (your console application).
 
 The Arun Microframework has an "out-of-the-box" native support for Dependency Injection by using _Containers_ and _Autowire_
-(thanks to PHP-DI) and an organized tree for easily writing your code in a simple way.
+(thanks to PHP-DI), facades and an organized tree for easily writing your code in a simple way.
 
-Starting from the 0.44.2-alpha version, Arun can auto-generate code for fast and easy development (See Chapter 'Code Auto-Generation' for further information).
+Starting from the 0.43-alpha version, Arun can auto-generate code for fast and easy development (See Chapter 'Code Auto-Generation' for further information).
+
+After your project is finished, you can also create a self-contained executable (.phar) thanks to gen:phar embedded action.
 
 _DISCLAIMER: This product is a prototype at an early stage of development and could have security issues... DO NOT USE IT IN PRODUCTION ENVIRONMENTS_
 
@@ -195,7 +198,7 @@ Arun will do the job for you...
 ```bash
 ./arun table
 
-Arun Microframework 0.44.2-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
+Arun Microframework 0.45-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
 
 Table: This Domain allows to interact with tables
 
@@ -296,7 +299,7 @@ Now you can call Arun with one, two, or three parameters...
 If you type ./arun table:create without parameters you will receive an automatic help... like this:
 
 ```
-Arun Microframework 0.44.2-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
+Arun Microframework 0.45-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
 
 Table: Table creation
 
@@ -316,7 +319,7 @@ create
 if you type ./arun without commands, actions, etc. you will receive a "global help" like this:
 
 ```
-Arun Microframework 0.44.2-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
+Arun Microframework 0.45-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
 
 Default: A Convention Over Configuration CLI Micro-Framework
 
@@ -563,7 +566,7 @@ ARUN has a built-in domain called "gen" dedicated to code-generation. Let's see 
 
 ./arun gen
 
-Arun Microframework 0.44.2-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
+Arun Microframework 0.45-alpha - (C) 2018 by Angelo Fonzeca (Apache License 2.0)
 
 Gen: Generates code for Arun Development Speed-up
 
@@ -922,6 +925,32 @@ NOTES:
 * "gen" and "example" domains are disabled by default in your generated .phar application
 
 * If you need to write/edit/manipulate files with your generated .phar application, remember in your code to specify absolute paths and/or use "getcwd" function. The ``` __DIR__ ``` will refer to path INSIDE the package and your code will not work outside that "box".
+
+### Facades support
+
+Arun supports a simple implementation of Facades for its internal core classes.
+
+For using them, use the statment "use" for including their namespace into your classes.
+
+The base namespace is "ArunCore\Facades\...FacadeName...", where "...FacadeName..." is one of the following:
+
+* ActionManipulator     ("ArunCore\\Core\\CodeBuilders\\ActionManipulator")
+* ContentGenerator      ("ArunCore\\Core\\IO\\FileContentGenerator")
+* Core                  ("ArunCore\\Core\\ArunCore")
+* DomainManipulator     ("ArunCore\\Core\\CodeBuilders\\DomainManipulator")
+* Executor              ("ArunCore\\Core\\Domain\\DomainActionExecutor")
+* HelpGenerator         ("ArunCore\\Core\\CodeBuilders\\ActionManipulator")
+* Input                 ("ArunCore\\Core\\IO\\ConsoleInput")
+* LLHelper              ("ArunCore\\Core\\Helpers\\LowLevelHelper")
+* NameGenerator         ("ArunCore\\Core\\Domain\\DomainActionNameGenerator")
+* Output                ("ArunCore\\Core\\IO\\ConsoleOutput")
+* Sanitizer             ("ArunCore\\Core\\Helpers\\Sanitizer")
+
+You can utilize facade in this way:
+
+```php
+$isClassNameValid = Sanitizer::isClassNameValid("Hello");
+```
 
 ### What about the internal Arun Engine? ###
 
