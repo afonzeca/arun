@@ -36,6 +36,8 @@ Starting from the 0.43-alpha version, Arun can auto-generate code for fast and e
 
 After your project is finished, you can also create a self-contained executable (.phar) thanks to gen:phar embedded action.
 
+If you want to analyze the source code note that ARUN has been divided in two parts: this project (the Arun "boilerplate") and the "core" which containts the most important part of the project ([https://github.com/afonzeca/arun-core])
+
 _DISCLAIMER: This product is a prototype at an early stage of development and could have security issues... DO NOT USE IT IN PRODUCTION ENVIRONMENTS_
 
 ### It is magic!
