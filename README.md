@@ -9,7 +9,7 @@
 
 * [What is Arun?](#what-is-arun)
 * [It is magic!](#it-is-magic)
-* [Why Arun was born?](#why-arun-was-born)
+* [Why was Arun born?](#why-was-arun-born)
 * [Create an Arun project](#create-an-arun-project)
 * [Coding Tutorials](#coding-tutorials)
 * [Code Auto Generation](#code-auto-generation)
@@ -75,7 +75,7 @@ Arun also supports "out-of-the-box" the phar generation, so your package will be
 <img src="docs/video/demo.gif">
 </p>
 
-### Why Arun was born?
+### Why was Arun born?
 
 Arun was born as a tool for creating a full working framework called "Sensuikan" on which I'm working on. Anyway during the development I realized
 that Arun could be used as a stand-alone component. So I made the "Arun Microframework Package".
